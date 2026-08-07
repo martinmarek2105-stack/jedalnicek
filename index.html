@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jedálniček – 11. – 16. 8. 2026</title>
+<title>Jedálniček – obedy 10. – 16. 8. 2026</title>
 <style>
   :root {
     --terracotta: #c1622d;
@@ -60,6 +60,7 @@
     flex-direction: column;
     gap: 8px;
   }
+  .card.skip { opacity: 0.75; border-style: dashed; }
   .card .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
   .card h3 { margin: 0; font-size: 1.15rem; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0; }
@@ -73,6 +74,7 @@
   }
   .tag.office { background: #e7ede0; color: var(--olive); }
   .tag.leftover { background: #ece3f5; color: #6a4d9c; }
+  .tag.skip { background: #efe9e0; color: var(--muted); }
   .teaser { font-size: 0.92rem; color: #4a4238; flex-grow: 1; }
   .card a.btn {
     align-self: flex-start;
@@ -160,63 +162,78 @@
 <body>
 
 <header>
-  <h1>Jedálniček rodiny Marekovcov</h1>
-  <p>Utorok 11. 8. – nedeľa 16. 8. 2026 · pondelok pokrytý (svokrovci)</p>
+  <h1>Jedálniček rodiny Marekovcov — OBEDY</h1>
+  <p>Pondelok 10. 8. – nedeľa 16. 8. 2026</p>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="top">
 
   <div class="rhythm-note">
-    Tento týždeň je posunutý o deň (pondelok je mimo domu, pokrytý), takže <b>utorok preberá úlohu pondelka</b>. Finálny rytmus: utorok večer sa varí väčšia dávka, ktorá pokrýva <b>celú stredu AJ celý štvrtok</b> (obed aj večera oba dni) — v utorok sa nekonzumuje. Štvrtok večer (po zjedení obeda zo zvyškov) sa varí ďalšia nová dávka, ktorá pokrýva <b>celý piatok</b> (obed aj večera). Sobota sa varí a je rovno ten istý deň, samostatne. Nedeľa sa varí a je, zvyšky pôjdu aj na budúci pondelok. Počíta sa so 4 osobami, nedeľa možno +1 (babka, každá druhá nedeľa) — ak príde, pridaj cca 1 kuracie stehno a hrsť zeleniny navyše.
+    Tento plán rieši <b>len obedy</b> (do práce aj domov) — večere si rodina kryje samostatne (studené/jednoduché), nie sú súčasťou tohto jedálnička. Rytmus: <b>nedeľa</b> varí obed pre seba aj pre nasledujúci <b>pondelok</b>. <b>Pondelok</b> večer varí novú dávku na obed pre <b>utorok + stredu</b>. <b>Streda</b> večer varí ďalšiu dávku na obed pre <b>štvrtok + piatok</b>. <b>Sobota</b> varí len pre seba. Počíta sa so 4 osobami, nedeľa možno +1 (babka, každá druhá nedeľa) — ak príde, pridaj cca 1 kuracie stehno a hrsť zeleniny navyše.
   </div>
 
   <div class="day-grid">
 
+    <div class="card skip">
+      <div class="date">Pondelok 10. 8. · obed netreba variť</div>
+      <h3>Obed z nedele (zvyšky)</h3>
+      <div class="tags"><span class="tag skip">netreba recept</span></div>
+      <p class="teaser">Obed je z nedeľňajšieho varenia. Večer sa varí nová dávka (grécke kura) — na utorňajší a stredajší obed, viď nižšie.</p>
+    </div>
+
     <div class="card">
-      <div class="date">Utorok 11. 8. · varí sa (väčšia dávka)</div>
+      <div class="date">Pondelok 10. 8. večer · varí sa (na 2 obedy)</div>
       <h3>Grécky kurací air-fryer tanier</h3>
       <div class="tags"><span class="tag">Grécka kuchyňa</span><span class="tag office">do kancelárie OK</span></div>
-      <p class="teaser">Marinované kuracie stehná, cukety a papriky z air fryera, bulgur a domáce tzatziki. Varí sa v utorok večer, dávka na CELÚ stredu aj CELÝ štvrtok (obed aj večera) — v utorok sa nekonzumuje.</p>
+      <p class="teaser">Marinované kuracie stehná, cukety a papriky z air fryera, bulgur a domáce tzatziki. Varí sa v pondelok večer, dávka na utorňajší AJ stredajší obed.</p>
+      <a class="btn" href="#mon">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Utorok 11. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Grécky kurací tanier</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Pondelkové kura + zelenina + bulgur, zohriate v MW, tzatziki pridané až na mieste (studené).</p>
       <a class="btn" href="#tue">Zobraziť recept ↓</a>
     </div>
 
     <div class="card">
-      <div class="date">Streda 12. 8. · zo zvyškov (deň 1)</div>
-      <h3>Grécky kurací tanier</h3>
-      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
-      <p class="teaser">Utorňajšie kura + zelenina + bulgur, zohriate v MW, tzatziki pridané až na mieste (studené). Obed aj večera z tej istej dávky.</p>
+      <div class="date">Streda 12. 8. · obed zo zvyškov (deň 2) + večer varí sa</div>
+      <h3>Grécky obed / Marocký guláš (večer na obed)</h3>
+      <div class="tags"><span class="tag leftover">obed: zo zvyškov</span><span class="tag">večer: Marocká kuchyňa</span></div>
+      <p class="teaser">Na obed sa dojedá grécka dávka (posledný deň). Večer sa varí nová dávka — marocký morčací guláš s cícerom, na štvrtkový aj piatkový obed.</p>
       <a class="btn" href="#wed">Zobraziť recept ↓</a>
     </div>
 
     <div class="card">
-      <div class="date">Štvrtok 13. 8. · zo zvyškov (deň 2) + varí sa večer</div>
-      <h3>Grécky obed / Marocký guláš (večer)</h3>
-      <div class="tags"><span class="tag leftover">obed: zo zvyškov</span><span class="tag">večer: Marocká kuchyňa</span></div>
-      <p class="teaser">Cez deň sa dojedá utorňajšia grécka dávka (posledný deň). Večer sa varí nová dávka — marocký morčací guláš s cícerom, určený na celý piatok.</p>
+      <div class="date">Štvrtok 13. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Marocký morčací guláš s cícerom</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Zo stredajšieho varenia. Teplé korenie (kumín, škorica), reheatom len získava.</p>
       <a class="btn" href="#thu">Zobraziť recept ↓</a>
     </div>
 
     <div class="card">
-      <div class="date">Piatok 14. 8. · zo zvyškov</div>
-      <h3>Marocký guláš zo štvrtka</h3>
+      <div class="date">Piatok 14. 8. · obed zo zvyškov (deň 2)</div>
+      <h3>Marocký guláš</h3>
       <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
-      <p class="teaser">Guláš na ryži/bulgure, teplé korenie reheatom len získava. Obed aj večera z tej istej dávky.</p>
+      <p class="teaser">Posledná porcia zo stredajšieho varenia. Ideálne prenosné do práce.</p>
       <a class="btn" href="#fri">Zobraziť recept ↓</a>
     </div>
 
     <div class="card">
-      <div class="date">Sobota 15. 8. · varí sa (ľahké)</div>
+      <div class="date">Sobota 15. 8. · varí sa na obed</div>
       <h3>Thajská kokosová biela ryba</h3>
       <div class="tags"><span class="tag">Thajská kuchyňa</span></div>
-      <p class="teaser">Rýchla kokosovo-zázvorová polievka s bielou rybou, limetkou a špenátom na jazmínovej ryži. 25 min, jedáva sa čerstvé.</p>
+      <p class="teaser">Rýchla kokosovo-zázvorová polievka s bielou rybou, limetkou a špenátom na jazmínovej ryži. 25 min, len na sobotňajší obed, samostatné.</p>
       <a class="btn" href="#sat">Zobraziť recept ↓</a>
     </div>
 
     <div class="card">
-      <div class="date">Nedeľa 16. 8. · varí sa (klasika)</div>
+      <div class="date">Nedeľa 16. 8. · varí sa na obed</div>
       <h3>Turecký pečený kurací obed</h3>
-      <div class="tags"><span class="tag">Turecká kuchyňa</span><span class="tag">nedeľná pečienka</span></div>
-      <p class="teaser">Korenené kuracie stehná s koreňovou zeleninou z rúry, bulgurový pilaf s mandľami, cesnakovo-mätový jogurt. Škálovateľné na 5.</p>
+      <div class="tags"><span class="tag">Turecká kuchyňa</span><span class="tag">nedeľný obed</span></div>
+      <p class="teaser">Korenené kuracie stehná s koreňovou zeleninou z rúry, bulgurový pilaf s mandľami, cesnakovo-mätový jogurt. Škálovateľné na 5. Zvyšky pokryjú aj pondelňajší obed (17. 8.).</p>
       <a class="btn" href="#sun">Zobraziť recept ↓</a>
     </div>
 
@@ -224,79 +241,84 @@
 
   <h2 class="section-title">Recepty</h2>
 
-  <section class="recipe" id="tue">
-    <h2>Utorok — Grécky kurací air-fryer tanier (väčšia dávka)</h2>
-    <div class="meta">Varí sa utorok večer, pokrýva CELÚ stredu + CELÝ štvrtok, obed aj večera (v utorok sa nekonzumuje) · Aktívny čas ~30 min · dávka pre 4 osoby na 2 dni · inšpirácia: Ramsay (technika opekania), Redzepi (letová zelenina)</div>
-    <h4>Suroviny (na 2 dni, 4 osoby)</h4>
+  <section class="recipe" id="mon">
+    <h2>Pondelok večer — Grécky kurací air-fryer tanier</h2>
+    <div class="meta">Varí sa pondelok večer, na utorňajší + stredajší obed (v pondelok sa nekonzumuje) · Aktívny čas ~30 min · dávka pre 4 osoby na 2 obedy</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
     <ul>
-      <li>1,4 kg kuracie stehná bez kosti, s kožou</li>
-      <li>4 cukety, na kocky</li>
-      <li>2 červené papriky, 1 žltá paprika</li>
-      <li>2 červené cibule</li>
-      <li>5 strúčikov cesnaku</li>
+      <li>1,1 kg kuracie stehná bez kosti, s kožou</li>
+      <li>3 cukety, na kocky</li>
+      <li>1 červená paprika, 1 žltá paprika</li>
+      <li>1 červená cibuľa</li>
+      <li>4 strúčiky cesnaku</li>
       <li>3 citróny (šťava + kôra)</li>
-      <li>3 PL olivového oleja, 2 ČL sušeného oregana, soľ, čierne korenie</li>
-      <li>450 g bulguru alebo orzo cestovín</li>
-      <li>350 g gréckeho jogurtu, 1 uhorka, kôpor — na tzatziki</li>
-      <li>voliteľné: 150 g fety</li>
+      <li>2 PL olivového oleja, 2 ČL sušeného oregana, soľ, čierne korenie</li>
+      <li>500 g bulguru alebo orzo cestovín</li>
+      <li>300 g gréckeho jogurtu, 1 uhorka, kôpor — na tzatziki</li>
+      <li>voliteľné: 120 g fety</li>
     </ul>
     <h4>Postup</h4>
     <ol>
       <li>Kuracie stehná marinuj 5 min v citrónovej šťave, oleji, cesnaku, oregane, soli.</li>
-      <li>Air fryer 200 °C, na 2 dávky ak treba: kuracie stehná 16–18 min (v polovici obráť); zeleninu súbežne alebo hneď po 12–14 min.</li>
+      <li>Air fryer 200 °C, v dávkach ak treba: kuracie stehná 16–18 min (v polovici obráť); zeleninu súbežne alebo hneď po 12–14 min.</li>
       <li>Uvar bulgur/orzo podľa návodu (10–12 min).</li>
       <li>Zmiešaj tzatziki z jogurtu, nastrúhanej uhorky, cesnaku, kôpru, soli.</li>
-      <li>Naservíruj kura a zeleninu na bulgure, polej tzatziki, feta navrch.</li>
+      <li>Nechaj vychladnúť, rozdeľ do krabičiek na 2 obedy (tzatziki zvlášť). V pondelok sa nič z toho neje.</li>
     </ol>
     <div class="note-box zero">🌿 Zero waste (Bottura): odrezky z papriky a cukety ulož do vrecka v mrazáku — základ na budúcu zeleninovú vývarovú polievku.</div>
-    <p><b>Uskladnenie:</b> celé jedlo (kura, zelenina, bulgur) rozdeľ na 2 dni do krabičiek a daj do chladničky — v utorok sa nič z toho neje. Streda = 1. deň (obed aj večera), štvrtok = 2. deň (obed aj večera). Tzatziki priprav do samostatnej nádobky, dopĺňaj čerstvé.</p>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
-  <section class="recipe" id="wed">
-    <h2>Streda — Grécky kurací tanier (zo zvyškov, deň 1)</h2>
-    <div class="meta">Z utorkového varenia, 1. z 2 dní · obed aj večera</div>
+  <section class="recipe" id="tue">
+    <h2>Utorok — Grécky kurací obed (zo zvyškov, deň 1)</h2>
+    <div class="meta">Z pondelkového varenia · obed do práce aj domov</div>
     <div class="note-box mw">🍽️ MW: 2,5 min na 800 W, v polovici premiešať. Tzatziki pridaj až po zohriatí (studené, oddelene v malej krabičke).</div>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
-  <section class="recipe" id="thu">
-    <h2>Štvrtok — cez deň: dojedá sa grécky obed (2. deň) · večer: Marocký morčací guláš s cícerom</h2>
-    <div class="meta">Cez deň zvyšky z utorka (posledný deň, rovnaké MW pokyny ako streda). Guláš sa varí štvrtok večer, celý na piatok (vo štvrtok sa nekonzumuje) · Aktívny čas ~27 min · 4 porcie na celý piatok (obed aj večera) · inšpirácia: Munk (netradičné korenenie), Redzepi (sezónna zelenina)</div>
-    <h4>Suroviny</h4>
+  <section class="recipe" id="wed">
+    <h2>Streda — obed: grécke (zo zvyškov, deň 2) · večer: Marocký morčací guláš s cícerom</h2>
+    <div class="meta">Obed z pondelkovej dávky (posledný deň, rovnaké MW pokyny ako utorok). Guláš sa varí stredu večer, na štvrtkový + piatkový obed (v stredu sa nekonzumuje) · Aktívny čas ~27 min · dávka pre 4 osoby na 2 obedy</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
     <ul>
-      <li>600 g mleté morčacie mäso</li>
+      <li>800 g mleté morčacie mäso</li>
       <li>1 cibuľa, 2 mrkvy, 1 cuketa — na kocky</li>
-      <li>2 strúčiky cesnaku</li>
-      <li>480 g cícera (2 konzervy, scedené)</li>
-      <li>80 g sušených marhúľ, nakrájané</li>
-      <li>1 ČL mletého kumínu, 1/2 ČL škorice, 1 ČL sladkej papriky, štipka zázvoru</li>
-      <li>300 ml zeleninový vývar (bez paradajok)</li>
+      <li>3 strúčiky cesnaku</li>
+      <li>720 g cícera (3 konzervy, scedené)</li>
+      <li>100 g sušených marhúľ, nakrájané</li>
+      <li>1,5 ČL mletého kumínu, 3/4 ČL škorice, 1,5 ČL sladkej papriky, štipka zázvoru</li>
+      <li>400 ml zeleninový vývar (bez paradajok)</li>
       <li>čerstvá koriandra alebo petržlen</li>
-      <li>250 g ryže alebo bulguru na prílohu</li>
+      <li>350 g ryže alebo bulguru na prílohu</li>
     </ul>
     <h4>Postup</h4>
     <ol>
       <li>Na panvici oroň cibuľu, mrkvu, cuketu ~5 min.</li>
-      <li>Pridaj mleté morčacie, opeč do dozlatista ~6 min.</li>
-      <li>Pridaj korenie, marhule, cícer, vývar. Duste 12–15 min do zhustnutia.</li>
-      <li>Servíruj na ryži/bulgure, posyp bylinkami.</li>
+      <li>Pridaj mleté morčacie, opeč do dozlatista ~7 min.</li>
+      <li>Pridaj korenie, marhule, cícer, vývar. Duste 15–18 min do zhustnutia.</li>
+      <li>Nechaj vychladnúť, rozdeľ do krabičiek na 2 obedy. V stredu sa nič z toho neje.</li>
     </ol>
     <div class="note-box zero">🌿 Zero waste: šupky z mrkvy a cibule zamraz na budúci vývar.</div>
-    <p><b>Uskladnenie:</b> celý guláš do krabičiek do chladničky — vo štvrtok sa neje (cez deň sa dojedá grécke), je celý určený na piatok (obed aj večera).</p>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="thu">
+    <h2>Štvrtok — Marocký guláš (zo zvyškov, deň 1)</h2>
+    <div class="meta">Zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2–3 min na 800 W, premiešať v polovici. Teplé korenie sa reheatom nezhorší — vhodné aj do zdieľanej kuchynky v práci.</div>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
   <section class="recipe" id="fri">
-    <h2>Piatok — Marocký guláš (zo zvyškov)</h2>
-    <div class="meta">Celá dávka zo štvrtkového varenia · obed aj večera</div>
-    <div class="note-box mw">🍽️ MW: 2–3 min na 800 W, premiešať v polovici. Teplé korenie sa reheatom nezhorší — vhodné aj do zdieľanej kuchynky v práci.</div>
+    <h2>Piatok — Marocký guláš (zo zvyškov, deň 2)</h2>
+    <div class="meta">Posledná porcia zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2–3 min na 800 W, premiešať v polovici.</div>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
   <section class="recipe" id="sat">
     <h2>Sobota — Thajská kokosová biela ryba</h2>
-    <div class="meta">Aktívny čas ~25 min · 4 porcie · jedáva sa čerstvé, aróma nevadí (doma)</div>
+    <div class="meta">Varí sa a je rovno na sobotňajší obed, samostatné (nič nepresahuje) · Aktívny čas ~25 min · 4 porcie</div>
     <h4>Suroviny</h4>
     <ul>
       <li>600 g bielej ryby (treska, tilapia, mieňava), na kúsky</li>
@@ -321,14 +343,14 @@
 
   <section class="recipe" id="sun">
     <h2>Nedeľa — Turecký pečený kurací obed</h2>
-    <div class="meta">Prep ~1 h 15 (mimo 30-min limitu) · 4 porcie, škálovateľné na 5 · inšpirácia: Ducasse (klasická technika), sedliacky zmysel — žiadne plytvanie</div>
-    <h4>Suroviny (4–5 porcií)</h4>
+    <div class="meta">Varí sa a je na nedeľný obed, zvyšky pokryjú aj pondelňajší obed (17. 8.) · Prep ~1 h 15 · 4 porcie, škálovateľné na 5 · inšpirácia: Ducasse (klasická technika), sedliacky zmysel — žiadne plytvanie</div>
+    <h4>Suroviny (4–5 porcií, + rezerva na pondelok)</h4>
     <ul>
-      <li>1,6–1,8 kg kuracie stehná/paličky s kosťou</li>
+      <li>1,8–2 kg kuracie stehná/paličky s kosťou</li>
       <li>1 ČL mletého rasca, 1 ČL sumaku, 1 ČL sladkej papriky, 1/2 ČL škorice, soľ, olivový olej, citrón</li>
-      <li>500 g malých zemiakov, na štvrtiny (ako zelenina, nie hlavná príloha)</li>
-      <li>400 g koreňovej zeleniny (mrkva, petržlen, cvikla), na kúsky</li>
-      <li>250 g bulguru, 1 cibuľa, hrsť mandlí/hrozienok (voliteľné) — na pilaf</li>
+      <li>600 g malých zemiakov, na štvrtiny (ako zelenina, nie hlavná príloha)</li>
+      <li>450 g koreňovej zeleniny (mrkva, petržlen, cvikla), na kúsky</li>
+      <li>300 g bulguru, 1 cibuľa, hrsť mandlí/hrozienok (voliteľné) — na pilaf</li>
       <li>300 g gréckeho jogurtu, cesnak, mäta alebo kôpor — na omáčku</li>
       <li>čerstvá petržlenová vňať</li>
     </ul>
@@ -339,39 +361,39 @@
       <li>Pieč kura a zeleninu spolu ~40–45 min do zlatista a prepečenia.</li>
       <li>Medzitým priprav pilaf: opraž cibuľu, pridaj bulgur, zalej vývarom, duste 12 min, na konci vmiešaj mandle/hrozienka.</li>
       <li>Cesnakovo-mätový jogurt: jogurt + pretlačený cesnak + nasekaná mäta/kôpor + soľ.</li>
-      <li>Servíruj spolu, ozdob petržlenom.</li>
+      <li>Servíruj na obed, zvyšné porcie odlož na pondelňajší obed.</li>
     </ol>
     <div class="note-box zero">🌿 Zero waste: kosti z kuraťa zamraz — základ na budúci domáci vývar.</div>
-    <p><b>Pre 5 (s babkou):</b> pridaj +1 stehno a hrsť zeleniny navyše, ostatné množstvá netreba meniť.</p>
+    <p><b>Pre 5 (s babkou):</b> pridaj +1 stehno a hrsť zeleniny navyše.</p>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
   <h2 class="section-title" id="shopping">Nákupný zoznam</h2>
-  <p style="font-size:0.9rem;color:var(--muted);margin-top:-8px;">Na tento týždeň (4 osoby, Ut–Ne), veľký nákup v sobotu ráno pokrýva budúci týždeň — tento zoznam kúp v predstihu na pondelok/utorok. Odhad nákladov na hlavné suroviny tohto plánu: ~80–95 € (z mesačného budgetu 500 €).</p>
+  <p style="font-size:0.9rem;color:var(--muted);margin-top:-8px;">Na tento týždeň (obedy pre 4 osoby, Po–Ne), veľký nákup v sobotu ráno. Odhad nákladov na hlavné suroviny tohto plánu: ~85–100 € (z mesačného budgetu 500 €).</p>
 
   <div class="shop-cols">
     <div class="shop-group">
       <h4>🥩 Mäso a ryby</h4>
-      <label><input type="checkbox"> Kuracie stehná bez kosti, s kožou — 1,4 kg</label>
-      <label><input type="checkbox"> Kuracie stehná/paličky s kosťou — 1,6–1,8 kg</label>
-      <label><input type="checkbox"> Mleté morčacie mäso — 600 g</label>
+      <label><input type="checkbox"> Kuracie stehná bez kosti, s kožou — 1,1 kg</label>
+      <label><input type="checkbox"> Kuracie stehná/paličky s kosťou — 1,8–2 kg</label>
+      <label><input type="checkbox"> Mleté morčacie mäso — 800 g</label>
       <label><input type="checkbox"> Biela ryba (treska/tilapia) — 600 g</label>
     </div>
     <div class="shop-group">
       <h4>🥦 Zelenina a ovocie</h4>
-      <label><input type="checkbox"> Cukety — 4 ks</label>
-      <label><input type="checkbox"> Červená paprika — 2 ks</label>
+      <label><input type="checkbox"> Cukety — 3 ks</label>
+      <label><input type="checkbox"> Červená paprika — 1 ks</label>
       <label><input type="checkbox"> Žltá paprika — 1 ks</label>
-      <label><input type="checkbox"> Červená cibuľa — 2 ks</label>
-      <label><input type="checkbox"> Žltá cibuľa — 2 ks</label>
+      <label><input type="checkbox"> Červená cibuľa — 1 ks</label>
+      <label><input type="checkbox"> Žltá cibuľa — 3 ks</label>
       <label><input type="checkbox"> Cesnak — 3 hlavičky</label>
       <label><input type="checkbox"> Citróny — 4 ks</label>
       <label><input type="checkbox"> Limetka — 1 ks</label>
-      <label><input type="checkbox"> Uhorka — 2 ks</label>
+      <label><input type="checkbox"> Uhorka — 1 ks</label>
       <label><input type="checkbox"> Mrkva — 3 ks</label>
       <label><input type="checkbox"> Petržlen (koreň) — 2 ks</label>
       <label><input type="checkbox"> Cvikla — 2 ks</label>
-      <label><input type="checkbox"> Malé zemiaky — 500 g</label>
+      <label><input type="checkbox"> Malé zemiaky — 600 g</label>
       <label><input type="checkbox"> Baby špenát — 150 g</label>
       <label><input type="checkbox"> Zázvor — kúsok</label>
       <label><input type="checkbox"> Čerstvá koriandra</label>
@@ -383,23 +405,24 @@
     </div>
     <div class="shop-group">
       <h4>🥫 Trvanlivé, strukoviny, konzervy</h4>
-      <label><input type="checkbox"> Cícer — 2 konzervy (480 g)</label>
+      <label><input type="checkbox"> Cícer — 3 konzervy (720 g)</label>
       <label><input type="checkbox"> Kokosové mlieko — 1 plechovka (400 ml)</label>
-      <label><input type="checkbox"> Sušené marhule — 80 g</label>
+      <label><input type="checkbox"> Sušené marhule — 100 g</label>
       <label><input type="checkbox"> Zeleninový vývar (kocka/tekutý)</label>
       <label><input type="checkbox"> Rybacia alebo sójová omáčka</label>
       <label><input type="checkbox"> Mandle alebo hrozienka (voliteľné)</label>
     </div>
     <div class="shop-group">
       <h4>🌾 Obiloviny</h4>
-      <label><input type="checkbox"> Bulgur — 700 g</label>
+      <label><input type="checkbox"> Bulgur — 800 g</label>
       <label><input type="checkbox"> Orzo cestoviny (alt. k bulguru) — 250 g</label>
       <label><input type="checkbox"> Jazmínová ryža — 250 g</label>
+      <label><input type="checkbox"> Ryža/bulgur na marocký guláš — 350 g</label>
     </div>
     <div class="shop-group">
       <h4>🧀 Mliečne a vajcia</h4>
-      <label><input type="checkbox"> Grécky jogurt — 650 g</label>
-      <label><input type="checkbox"> Feta (voliteľné) — 150 g</label>
+      <label><input type="checkbox"> Grécky jogurt — 600 g</label>
+      <label><input type="checkbox"> Feta (voliteľné) — 120 g</label>
     </div>
     <div class="shop-group">
       <h4>🧂 Koreniny (skontroluj zásobu)</h4>
@@ -416,28 +439,28 @@
 
   <div class="keep-box">
     <b>Text na skopírovanie do Google Keep:</b>
-    <textarea id="keepText" readonly>NÁKUPNÝ ZOZNAM – týždeň 11.–16. 8. 2026
+    <textarea id="keepText" readonly>NÁKUPNÝ ZOZNAM – týždeň 10.–16. 8. 2026 (obedy)
 
 MÄSO A RYBY
-- Kuracie stehná bez kosti, s kožou – 1,4 kg
-- Kuracie stehná/paličky s kosťou – 1,6-1,8 kg
-- Mleté morčacie mäso – 600 g
+- Kuracie stehná bez kosti, s kožou – 1,1 kg
+- Kuracie stehná/paličky s kosťou – 1,8-2 kg
+- Mleté morčacie mäso – 800 g
 - Biela ryba (treska/tilapia) – 600 g
 
 ZELENINA A OVOCIE
-- Cukety – 4 ks
-- Červená paprika – 2 ks
+- Cukety – 3 ks
+- Červená paprika – 1 ks
 - Žltá paprika – 1 ks
-- Červená cibuľa – 2 ks
-- Žltá cibuľa – 2 ks
+- Červená cibuľa – 1 ks
+- Žltá cibuľa – 3 ks
 - Cesnak – 3 hlavičky
 - Citróny – 4 ks
 - Limetka – 1 ks
-- Uhorka – 2 ks
+- Uhorka – 1 ks
 - Mrkva – 3 ks
 - Petržlen (koreň) – 2 ks
 - Cvikla – 2 ks
-- Malé zemiaky – 500 g
+- Malé zemiaky – 600 g
 - Baby špenát – 150 g
 - Zázvor – kúsok
 - Čerstvá koriandra
@@ -448,21 +471,21 @@ ZELENINA A OVOCIE
 - Čili paprička (voliteľné)
 
 TRVANLIVÉ / STRUKOVINY / KONZERVY
-- Cícer – 2 konzervy (480 g)
+- Cícer – 3 konzervy (720 g)
 - Kokosové mlieko – 1 plechovka (400 ml)
-- Sušené marhule – 80 g
+- Sušené marhule – 100 g
 - Zeleninový vývar
 - Rybacia/sójová omáčka
 - Mandle alebo hrozienka (voliteľné)
 
 OBILOVINY
-- Bulgur – 700 g
+- Bulgur – 800 g
 - Orzo cestoviny – 250 g
 - Jazmínová ryža – 250 g
 
 MLIEČNE A VAJCIA
-- Grécky jogurt – 650 g
-- Feta (voliteľné) – 150 g
+- Grécky jogurt – 600 g
+- Feta (voliteľné) – 120 g
 
 KORENINY (skontroluj zásobu)
 - Oregano, kumín, škorica, sladká paprika, mletý zázvor, rasca, sumak, olivový olej</textarea>

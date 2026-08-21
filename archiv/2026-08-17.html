@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jedálniček – obedy 17. – 23. 8. 2026</title>
+<style>
+  :root {
+    --terracotta: #c1622d;
+    --terracotta-dark: #9c4c22;
+    --olive: #6b7d4f;
+    --cream: #faf3e9;
+    --cream-card: #ffffff;
+    --ink: #2e2822;
+    --muted: #7a7168;
+    --border: #e8ddcc;
+    --badge-office: #6b7d4f;
+    --badge-fresh: #c1622d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+  header {
+    background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+    color: #fff;
+    padding: 32px 20px 26px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.6rem; }
+  header p { margin: 0; opacity: 0.92; font-size: 0.95rem; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 16px; }
+  .rhythm-note {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 26px;
+  }
+  .rhythm-note b { color: var(--ink); }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card.skip { opacity: 0.75; border-style: dashed; }
+  .card .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .card h3 { margin: 0; font-size: 1.15rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0; }
+  .tag {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #f1e8d8;
+    color: var(--terracotta-dark);
+    font-weight: 600;
+  }
+  .tag.office { background: #e7ede0; color: var(--olive); }
+  .tag.leftover { background: #ece3f5; color: #6a4d9c; }
+  .tag.skip { background: #efe9e0; color: var(--muted); }
+  .teaser { font-size: 0.92rem; color: #4a4238; flex-grow: 1; }
+  .card a.btn {
+    align-self: flex-start;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--terracotta);
+    padding: 7px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .card a.btn:hover { background: var(--terracotta-dark); }
+
+  section.recipe {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    scroll-margin-top: 16px;
+  }
+  section.recipe h2 { margin-top: 0; font-size: 1.25rem; }
+  section.recipe .meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+  section.recipe h4 { margin: 16px 0 6px; font-size: 0.95rem; color: var(--terracotta-dark); }
+  section.recipe ul, section.recipe ol { margin: 0; padding-left: 20px; font-size: 0.92rem; }
+  section.recipe li { margin-bottom: 4px; }
+  .note-box {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+  .note-box.mw { background: #eef2e6; color: #4b5a34; }
+  .note-box.zero { background: #f6ece0; color: #7a4a1f; }
+  .back-link { font-size: 0.8rem; }
+
+  h2.section-title {
+    font-size: 1.3rem;
+    margin: 44px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--terracotta);
+  }
+  .shop-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; }
+  .shop-group {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .shop-group h4 { margin: 0 0 8px; font-size: 0.9rem; color: var(--terracotta-dark); }
+  .shop-group label { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; margin-bottom: 6px; cursor: pointer; }
+  .shop-group input[type=checkbox] { accent-color: var(--terracotta); }
+  .keep-box {
+    margin-top: 22px;
+    background: #fffef9;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .keep-box textarea {
+    width: 100%;
+    min-height: 220px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+    padding: 10px;
+    resize: vertical;
+  }
+  .copy-btn {
+    margin-top: 8px;
+    background: var(--olive);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  footer { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Jedálniček rodiny Marekovcov — OBEDY</h1>
+  <p>Pondelok 17. 8. – nedeľa 23. 8. 2026</p>
+</header>
+
+<div class="wrap" id="top">
+
+  <div class="rhythm-note">
+    Tento plán rieši <b>len obedy</b> (do práce aj domov) — večere si rodina kryje samostatne (studené/jednoduché), nie sú súčasťou tohto jedálnička. Rytmus: <b>nedeľa</b> varí obed pre seba aj pre nasledujúci <b>pondelok</b>. <b>Pondelok</b> večer varí novú dávku na obed pre <b>utorok + stredu</b>. <b>Streda</b> večer varí ďalšiu dávku na obed pre <b>štvrtok + piatok</b>. <b>Sobota</b> varí len pre seba. Veľký nákup na tento týždeň rob <b>v piatok podvečer po 17:00</b> (Kaufland akcia -10%). Počíta sa so 4 osobami, nedeľa možno +1 (babka, každá druhá nedeľa) — ak príde, pridaj cca 1 kuracie stehno a hrsť zeleniny navyše.
+  </div>
+
+  <div class="day-grid">
+
+    <div class="card skip">
+      <div class="date">Pondelok 17. 8. · obed netreba variť</div>
+      <h3>Obed z nedele (zvyšky)</h3>
+      <div class="tags"><span class="tag skip">netreba recept</span></div>
+      <p class="teaser">Obed je z minulotýždňového nedeľného varenia (turecké). Večer sa varí nová dávka (indická) — na utorňajší a stredajší obed, viď nižšie.</p>
+    </div>
+
+    <div class="card">
+      <div class="date">Pondelok 17. 8. večer · varí sa (na 2 obedy)</div>
+      <h3>Indický kurací korma</h3>
+      <div class="tags"><span class="tag">Indická kuchyňa</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Kuracie stehná v kokosovo-koreninovej omáčke (bez paradajok), ryža. Varí sa v pondelok večer, dávka na utorňajší AJ stredajší obed.</p>
+      <a class="btn" href="#mon">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Utorok 18. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Indický kurací korma</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Pondelkový korma + ryža, zohriate v MW.</p>
+      <a class="btn" href="#tue">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Streda 19. 8. · obed zo zvyškov (deň 2) + večer varí sa</div>
+      <h3>Indický obed / Čínsky wok (večer)</h3>
+      <div class="tags"><span class="tag leftover">obed: zo zvyškov</span><span class="tag">večer: Čínska kuchyňa</span></div>
+      <p class="teaser">Na obed sa dojedá indická dávka (posledný deň). Večer sa varí nová dávka — čínske kuracie so zeleninou na wok, na štvrtkový aj piatkový obed.</p>
+      <a class="btn" href="#wed">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Štvrtok 20. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Čínske kuracie so zeleninou</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Zo stredajšieho varenia. Rýchly wok, sójovo-zázvorová chuť.</p>
+      <a class="btn" href="#thu">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Piatok 21. 8. · obed zo zvyškov (deň 2)</div>
+      <h3>Čínske kuracie so zeleninou</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Posledná porcia zo stredajšieho varenia. Ideálne prenosné do práce.</p>
+      <a class="btn" href="#fri">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Sobota 22. 8. · varí sa na obed</div>
+      <h3>Levantské kura s hummusom</h3>
+      <div class="tags"><span class="tag">Arabská/levantská kuchyňa</span></div>
+      <p class="teaser">Citrónovo-cesnakové kura z rúry so zemiakmi a domácim hummusom. Len na sobotňajší obed, samostatné.</p>
+      <a class="btn" href="#sat">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Nedeľa 23. 8. · varí sa na obed</div>
+      <h3>Karibské jerk kura s ryžou a fazuľou</h3>
+      <div class="tags"><span class="tag">Karibská kuchyňa</span><span class="tag">nedeľný obed</span></div>
+      <p class="teaser">Korenené jerk kura z rúry/grilu, ryža s červenou fazuľou a kokosovým mliekom. Škálovateľné na 5. Zvyšky pokryjú aj pondelňajší obed (24. 8.).</p>
+      <a class="btn" href="#sun">Zobraziť recept ↓</a>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Recepty</h2>
+
+  <section class="recipe" id="mon">
+    <h2>Pondelok večer — Indický kurací korma</h2>
+    <div class="meta">Varí sa pondelok večer, na utorňajší + stredajší obed (v pondelok sa nekonzumuje) · Aktívny čas ~30 min · dávka pre 4 osoby na 2 obedy · inšpirácia: Munk (netradičné korenenie)</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
+    <ul>
+      <li>1,1 kg kuracie stehná bez kosti, na kúsky</li>
+      <li>2 cibule</li>
+      <li>5 strúčikov cesnaku</li>
+      <li>kúsok čerstvého zázvoru (~4 cm)</li>
+      <li>2 plechovky kokosového mlieka (800 ml)</li>
+      <li>2 ČL garam masala, 1 ČL kurkumy, 1 ČL mletého kumínu, 1 ČL mletej koriandry, čili podľa chuti</li>
+      <li>500 g basmati ryže</li>
+      <li>hrsť kešu orieškov (voliteľné)</li>
+      <li>čerstvá koriandra</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Cibuľu, cesnak a zázvor jemne nasekaj, oreň na oleji ~5 min do zosklovatenia.</li>
+      <li>Pridaj korenie, krátko opraž (30 s), pridaj kura, opeč zvonka ~5 min.</li>
+      <li>Zalej kokosovým mliekom, dus 18–20 min do mäkka a zhustnutia omáčky.</li>
+      <li>Uvar ryžu v ryžovare. Nechaj korma vychladnúť, rozdeľ do krabičiek na 2 obedy.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste (Munk): šupky zo zázvoru a cesnaku ulož do vrecka v mrazáku na budúci vývar.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="tue">
+    <h2>Utorok — Indický korma (zo zvyškov, deň 1)</h2>
+    <div class="meta">Z pondelkového varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2,5 min na 800 W, v polovici premiešať.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="wed">
+    <h2>Streda — obed: korma (zo zvyškov, deň 2) · večer: Čínske kuracie so zeleninou</h2>
+    <div class="meta">Obed z pondelkovej dávky (posledný deň). Wok sa varí stredu večer, na štvrtkový + piatkový obed (v stredu sa nekonzumuje) · Aktívny čas ~25 min · dávka pre 4 osoby na 2 obedy · inšpirácia: Ramsay (technika rýchleho wok-restovania)</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
+    <ul>
+      <li>900 g kuracie prsia, na tenké prúžky</li>
+      <li>2 mrkvy, na prúžky</li>
+      <li>300 g brokolice, ružičky</li>
+      <li>200 g kapusty alebo pak choi</li>
+      <li>4 strúčiky cesnaku, kúsok zázvoru</li>
+      <li>6 PL sójovej omáčky, 2 PL sezamového oleja</li>
+      <li>500 g ryže alebo ryžových rezancov</li>
+      <li>sezamové semienka, jarná cibuľka</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Kura marinuj 10 min v polovici sójovej omáčky.</li>
+      <li>Na woku/panvici na vysokom ohni oreň cesnak a zázvor 30 s, pridaj kura, opeč do biela ~4 min.</li>
+      <li>Pridaj tvrdšiu zeleninu (mrkva, brokolica), restuj 4 min, potom kapustu ešte 2 min.</li>
+      <li>Dochuť zvyšnou sójovou omáčkou a sezamovým olejom. Uvar ryžu/rezance.</li>
+      <li>Nechaj vychladnúť, rozdeľ do krabičiek na 2 obedy. V stredu sa nič z toho neje.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste: stopky brokolice a šupky mrkvy nakrájaj na prúžky a pridaj do woku alebo zamraz na vývar.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="thu">
+    <h2>Štvrtok — Čínske kuracie so zeleninou (zo zvyškov, deň 1)</h2>
+    <div class="meta">Zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2 min na 800 W, premiešať v polovici — zelenina nech zostane chrumkavá.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="fri">
+    <h2>Piatok — Čínske kuracie so zeleninou (zo zvyškov, deň 2)</h2>
+    <div class="meta">Posledná porcia zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2 min na 800 W, premiešať v polovici.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="sat">
+    <h2>Sobota — Levantské kura s hummusom</h2>
+    <div class="meta">Varí sa a je rovno na sobotňajší obed, samostatné (nič nepresahuje) · Aktívny čas ~30 min · 4 porcie · inšpirácia: Ducasse (klasická technika pečenia)</div>
+    <h4>Suroviny</h4>
+    <ul>
+      <li>700 g kuracie stehná bez kosti</li>
+      <li>500 g zemiakov, na kocky</li>
+      <li>1 cibuľa</li>
+      <li>4 strúčiky cesnaku, 2 citróny</li>
+      <li>1 ČL rasce, 1 ČL sladkej papriky, 1/2 ČL sumaku</li>
+      <li>400 g cícera (konzerva), 3 PL tahini, olivový olej</li>
+      <li>šalát/uhorka na dozdobenie</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Rúra na 210 °C. Kura a zemiaky premiešaj s olejom, citrónovou šťavou, rascou, paprikou, soľou.</li>
+      <li>Pieč na plechu 25–28 min, kým je kura prepečené a zemiaky zlaté.</li>
+      <li>Hummus: cícer, tahini, prelisovaný cesnak, citrónová šťava, trocha vody rozmixuj dohladka, dochuť soľou a sumakom.</li>
+      <li>Servíruj kura so zemiakmi na hummuse, so šalátom.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste: šťava z cíceru (aquafaba) sa dá zamraziť na budúce pečenie namiesto vaječného bielka.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="sun">
+    <h2>Nedeľa — Karibské jerk kura s ryžou a fazuľou</h2>
+    <div class="meta">Varí sa a je na nedeľný obed, zvyšky pokryjú aj pondelňajší obed (24. 8.) · Prep ~1 h (vrátane marinovania) · 4 porcie, škálovateľné na 5 · inšpirácia: Redzepi (práca s korením a citrusmi), sedliacky zmysel</div>
+    <h4>Suroviny (4–5 porcií, + rezerva na pondelok)</h4>
+    <ul>
+      <li>1,8 kg kuracie stehná/paličky s kosťou</li>
+      <li>marináda: 1 ČL rasce, 1 ČL škorice, 1/2 ČL nového korenia, 4 strúčiky cesnaku, kúsok zázvoru, šťava z 2 limetiek, 1 PL medu, voliteľne trocha čili</li>
+      <li>400 g ryže</li>
+      <li>400 g červenej fazule (konzerva, scedená)</li>
+      <li>400 ml kokosové mlieko</li>
+      <li>1 cibuľa, jarná cibuľka</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Kura marinuj v jerk marináde aspoň 20 min (ideálne dlhšie, kým sa pripravuje príloha).</li>
+      <li>Rúra/gril na 200 °C, pieč/grilluj kura 35–40 min do prepečenia a zlatista.</li>
+      <li>Ryžu var s kokosovým mliekom, fazuľou a osmaženou cibuľou ~15 min.</li>
+      <li>Servíruj kura na ryži s fazuľou, posyp jarnou cibuľkou. Zvyšné porcie odlož na pondelňajší obed.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste: kosti z kuraťa zamraz — základ na budúci domáci vývar.</div>
+    <p><b>Pre 5 (s babkou):</b> pridaj +1 stehno a hrsť zeleniny navyše.</p>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <h2 class="section-title" id="shopping">Nákupný zoznam</h2>
+  <p style="font-size:0.9rem;color:var(--muted);margin-top:-8px;">Na tento týždeň (obedy pre 4 osoby, Po–Ne). <b>Veľký nákup rob v piatok podvečer po 17:00</b> — Kaufland akcia -10% na večerné nakupovanie. Odhad nákladov na hlavné suroviny tohto plánu: ~85–100 € (z mesačného budgetu 500 €).</p>
+
+  <div class="shop-cols">
+    <div class="shop-group">
+      <h4>🥩 Mäso a ryby</h4>
+      <label><input type="checkbox"> Kuracie stehná bez kosti — 1,1 kg (na korma)</label>
+      <label><input type="checkbox"> Kuracie prsia — 900 g (na čínske)</label>
+      <label><input type="checkbox"> Kuracie stehná bez kosti — 700 g (na levantské)</label>
+      <label><input type="checkbox"> Kuracie stehná/paličky s kosťou — 1,8 kg (na jerk)</label>
+    </div>
+    <div class="shop-group">
+      <h4>🥦 Zelenina a ovocie</h4>
+      <label><input type="checkbox"> Cibuľa — 4 ks</label>
+      <label><input type="checkbox"> Cesnak — 4 hlavičky</label>
+      <label><input type="checkbox"> Zázvor — 2 kúsky</label>
+      <label><input type="checkbox"> Mrkva — 2 ks</label>
+      <label><input type="checkbox"> Brokolica — 300 g</label>
+      <label><input type="checkbox"> Kapusta alebo pak choi — 200 g</label>
+      <label><input type="checkbox"> Zemiaky — 500 g</label>
+      <label><input type="checkbox"> Citróny — 2 ks</label>
+      <label><input type="checkbox"> Limetky — 2 ks</label>
+      <label><input type="checkbox"> Šalát/uhorka na dozdobenie</label>
+      <label><input type="checkbox"> Jarná cibuľka — 2 zväzky</label>
+      <label><input type="checkbox"> Čerstvá koriandra</label>
+      <label><input type="checkbox"> Čili paprička (voliteľné)</label>
+    </div>
+    <div class="shop-group">
+      <h4>🥫 Trvanlivé, strukoviny, konzervy</h4>
+      <label><input type="checkbox"> Kokosové mlieko — 3 plechovky (1,2 l)</label>
+      <label><input type="checkbox"> Cícer — 1 konzerva (400 g)</label>
+      <label><input type="checkbox"> Tahini — 1 pohár</label>
+      <label><input type="checkbox"> Červená fazuľa — 1 konzerva (400 g)</label>
+      <label><input type="checkbox"> Sójová omáčka</label>
+      <label><input type="checkbox"> Sezamový olej</label>
+      <label><input type="checkbox"> Kešu oriešky (voliteľné)</label>
+      <label><input type="checkbox"> Med</label>
+    </div>
+    <div class="shop-group">
+      <h4>🌾 Obiloviny</h4>
+      <label><input type="checkbox"> Basmati ryža — 500 g</label>
+      <label><input type="checkbox"> Ryža/ryžové rezance — 500 g</label>
+      <label><input type="checkbox"> Ryža na jerk — 400 g</label>
+    </div>
+    <div class="shop-group">
+      <h4>🧂 Koreniny (skontroluj zásobu)</h4>
+      <label><input type="checkbox"> Garam masala</label>
+      <label><input type="checkbox"> Kurkuma</label>
+      <label><input type="checkbox"> Mletý kumín</label>
+      <label><input type="checkbox"> Mletá koriandra</label>
+      <label><input type="checkbox"> Rasca</label>
+      <label><input type="checkbox"> Sladká paprika</label>
+      <label><input type="checkbox"> Sumak</label>
+      <label><input type="checkbox"> Škorica</label>
+      <label><input type="checkbox"> Nové korenie</label>
+      <label><input type="checkbox"> Sezamové semienka</label>
+      <label><input type="checkbox"> Olivový olej</label>
+    </div>
+  </div>
+
+  <div class="keep-box">
+    <b>Text na skopírovanie do Google Keep:</b>
+    <textarea id="keepText" readonly>NÁKUPNÝ ZOZNAM – týždeň 17.–23. 8. 2026 (obedy)
+Veľký nákup: PIATOK PODVEČER po 17:00 (Kaufland -10%)
+
+MÄSO
+- Kuracie stehná bez kosti – 1,1 kg (korma)
+- Kuracie prsia – 900 g (čínske)
+- Kuracie stehná bez kosti – 700 g (levantské)
+- Kuracie stehná/paličky s kosťou – 1,8 kg (jerk)
+
+ZELENINA A OVOCIE
+- Cibuľa – 4 ks
+- Cesnak – 4 hlavičky
+- Zázvor – 2 kúsky
+- Mrkva – 2 ks
+- Brokolica – 300 g
+- Kapusta/pak choi – 200 g
+- Zemiaky – 500 g
+- Citróny – 2 ks
+- Limetky – 2 ks
+- Šalát/uhorka
+- Jarná cibuľka – 2 zväzky
+- Čerstvá koriandra
+- Čili (voliteľné)
+
+TRVANLIVÉ / STRUKOVINY / KONZERVY
+- Kokosové mlieko – 3 plechovky (1,2 l)
+- Cícer – 1 konzerva (400 g)
+- Tahini
+- Červená fazuľa – 1 konzerva (400 g)
+- Sójová omáčka
+- Sezamový olej
+- Kešu oriešky (voliteľné)
+- Med
+
+OBILOVINY
+- Basmati ryža – 500 g
+- Ryža/rezance – 500 g
+- Ryža na jerk – 400 g
+
+KORENINY (skontroluj zásobu)
+- Garam masala, kurkuma, kumín, koriandra, rasca, sladká paprika, sumak, škorica, nové korenie, sezamové semienka, olivový olej</textarea>
+    <br>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('keepText').value); this.textContent='Skopírované ✓'; setTimeout(()=>this.textContent='Kopírovať text',1500)">Kopírovať text</button>
+  </div>
+
+  <h2 class="section-title">Predchádzajúce týždne</h2>
+  <ul>
+    <li><a href="archiv/2026-08-10.html">10.–16. 8. 2026</a></li>
+  </ul>
+
+  <footer>
+    Budúci týždeň v rotácii: juhoamerická, stredomorská, európska a vegetariánska fusion kuchyňa. Brief so všetkými pravidlami: <code>rodinny-jedalnicek-brief.md</code>.
+  </footer>
+
+</div>
+
+</body>
+</html>

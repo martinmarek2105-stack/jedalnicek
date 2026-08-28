@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jedálniček – obedy 24. – 30. 8. 2026</title>
+<style>
+  :root {
+    --terracotta: #c1622d;
+    --terracotta-dark: #9c4c22;
+    --olive: #6b7d4f;
+    --cream: #faf3e9;
+    --cream-card: #ffffff;
+    --ink: #2e2822;
+    --muted: #7a7168;
+    --border: #e8ddcc;
+    --badge-office: #6b7d4f;
+    --badge-fresh: #c1622d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+  header {
+    background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+    color: #fff;
+    padding: 32px 20px 26px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.6rem; }
+  header p { margin: 0; opacity: 0.92; font-size: 0.95rem; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 24px 16px; }
+  .rhythm-note {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 26px;
+  }
+  .rhythm-note b { color: var(--ink); }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .card {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card.skip { opacity: 0.75; border-style: dashed; }
+  .card .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .card h3 { margin: 0; font-size: 1.15rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0; }
+  .tag {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #f1e8d8;
+    color: var(--terracotta-dark);
+    font-weight: 600;
+  }
+  .tag.office { background: #e7ede0; color: var(--olive); }
+  .tag.leftover { background: #ece3f5; color: #6a4d9c; }
+  .tag.skip { background: #efe9e0; color: var(--muted); }
+  .teaser { font-size: 0.92rem; color: #4a4238; flex-grow: 1; }
+  .card a.btn {
+    align-self: flex-start;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--terracotta);
+    padding: 7px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .card a.btn:hover { background: var(--terracotta-dark); }
+
+  section.recipe {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    scroll-margin-top: 16px;
+  }
+  section.recipe h2 { margin-top: 0; font-size: 1.25rem; }
+  section.recipe .meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+  section.recipe h4 { margin: 16px 0 6px; font-size: 0.95rem; color: var(--terracotta-dark); }
+  section.recipe ul, section.recipe ol { margin: 0; padding-left: 20px; font-size: 0.92rem; }
+  section.recipe li { margin-bottom: 4px; }
+  .note-box {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+  .note-box.mw { background: #eef2e6; color: #4b5a34; }
+  .note-box.zero { background: #f6ece0; color: #7a4a1f; }
+  .back-link { font-size: 0.8rem; }
+
+  h2.section-title {
+    font-size: 1.3rem;
+    margin: 44px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--terracotta);
+  }
+  h3.shop-subtitle {
+    font-size: 1.05rem;
+    margin: 28px 0 10px;
+    color: var(--terracotta-dark);
+  }
+  .shop-block {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px 22px;
+    margin-bottom: 22px;
+    background: #fffdf8;
+  }
+  .shop-block .shop-when {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: -4px 0 14px;
+  }
+  .shop-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; }
+  .shop-group {
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .shop-group h4 { margin: 0 0 8px; font-size: 0.9rem; color: var(--terracotta-dark); }
+  .shop-group label { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; margin-bottom: 6px; cursor: pointer; }
+  .shop-group input[type=checkbox] { accent-color: var(--terracotta); }
+  .keep-box {
+    margin-top: 18px;
+    background: #fffef9;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .keep-box textarea {
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+    padding: 10px;
+    resize: vertical;
+  }
+  .copy-btn {
+    margin-top: 8px;
+    background: var(--olive);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  footer { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Jedálniček rodiny Marekovcov — OBEDY</h1>
+  <p>Pondelok 24. 8. – nedeľa 30. 8. 2026</p>
+</header>
+
+<div class="wrap" id="top">
+
+  <div class="rhythm-note">
+    Tento plán rieši <b>len obedy</b> (do práce aj domov) — večere si rodina kryje samostatne (studené/jednoduché), nie sú súčasťou tohto jedálnička. Rytmus: <b>nedeľa</b> varí obed pre seba aj pre nasledujúci <b>pondelok</b>. <b>Pondelok</b> večer varí novú dávku na obed pre <b>utorok + stredu</b>. <b>Streda</b> večer varí ďalšiu dávku na obed pre <b>štvrtok + piatok</b>. <b>Sobota</b> varí len pre seba. Počíta sa so 4 osobami, nedeľa možno +1 (babka, každá druhá nedeľa) — ak príde, pridaj cca 1 porciu bielkoviny a hrsť zeleniny navyše. <b>Nákup je tento týždeň rozdelený na tri dni</b> (piatok veľký, pondelok a streda malé čerstvé nákupy) — viď sekcia Nákupný zoznam nižšie.
+    <br><br>
+    <b>Bielkoviny sa od tohto týždňa striedajú širšie</b> (kura, chudé bravčové – stehno/panenka/karé, morčacie, králik, ryba aspoň 1× týždenne) a <b>sobota je odteraz na cestovinách</b>.
+  </div>
+
+  <div class="day-grid">
+
+    <div class="card skip">
+      <div class="date">Pondelok 24. 8. · obed netreba variť</div>
+      <h3>Obed z nedele (zvyšky)</h3>
+      <div class="tags"><span class="tag skip">netreba recept</span></div>
+      <p class="teaser">Obed je z minulotýždňového nedeľného varenia (juhoamerické grilované kura). Večer sa varí nová dávka (Španielsko) — na utorňajší a stredajší obed, viď nižšie.</p>
+    </div>
+
+    <div class="card">
+      <div class="date">Pondelok 24. 8. večer · varí sa (na 2 obedy)</div>
+      <h3>Treska al ajillo s pečenou paprikou a zemiakmi</h3>
+      <div class="tags"><span class="tag">Mediteránska kuchyňa — Španielsko</span><span class="tag office">do kancelárie OK</span><span class="tag">🐟 ryba týždňa</span></div>
+      <p class="teaser">Biela ryba dusená v cesnakovo-olivovom oleji (gambas al ajillo štýl), pečené zemiaky a paprika. Varí sa v pondelok večer, dávka na utorňajší AJ stredajší obed.</p>
+      <a class="btn" href="#mon">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Utorok 25. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Treska al ajillo</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Pondelková treska so zemiakmi, jemne zohriata v MW.</p>
+      <a class="btn" href="#tue">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Streda 26. 8. · obed zo zvyškov (deň 2) + večer varí sa</div>
+      <h3>Španielsky obed / Stredoeurópsky paprikáš (večer)</h3>
+      <div class="tags"><span class="tag leftover">obed: zo zvyškov</span><span class="tag">večer: Stredoeurópska kuchyňa</span></div>
+      <p class="teaser">Na obed sa dojedá španielska (rybacia) dávka, posledný deň. Večer sa varí nová dávka — bravčový paprikáš (z chudého karé) so smotanou a cestovinami, na štvrtkový aj piatkový obed.</p>
+      <a class="btn" href="#wed">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Štvrtok 27. 8. · obed zo zvyškov (deň 1)</div>
+      <h3>Bravčový paprikáš</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Zo stredajšieho varenia. Krémový paprikáš z chudého karé s cestovinami.</p>
+      <a class="btn" href="#thu">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Piatok 28. 8. · obed zo zvyškov (deň 2)</div>
+      <h3>Bravčový paprikáš</h3>
+      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
+      <p class="teaser">Posledná porcia zo stredajšieho varenia. Ideálne prenosné do práce.</p>
+      <a class="btn" href="#fri">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Sobota 29. 8. · varí sa na obed</div>
+      <h3>Kokosovo-kari cestoviny s cícerom, batátmi a vajcom</h3>
+      <div class="tags"><span class="tag">Vegetariánska fusion kuchyňa</span><span class="tag">🍝 cestoviny</span></div>
+      <p class="teaser">Krátke cestoviny premiešané v kokosovo-korenenej omáčke s cícerom, batátmi a špenátom, s praženým vajcom navrchu. Len na sobotňajší obed, samostatné.</p>
+      <a class="btn" href="#sat">Zobraziť recept ↓</a>
+    </div>
+
+    <div class="card">
+      <div class="date">Nedeľa 30. 8. · varí sa na obed</div>
+      <h3>Juhoamerické grilované kura "a la brasa" s aji verde</h3>
+      <div class="tags"><span class="tag">Juhoamerická kuchyňa (Peru)</span><span class="tag">nedeľný obed</span></div>
+      <p class="teaser">Grilované/pečené kura marinované v cesnaku, limetke a rasci, so zelenou bylinkovou omáčkou, čiernou fazuľou a ryžou. Škálovateľné na 5. Zvyšky pokryjú aj pondelňajší obed (31. 8.).</p>
+      <a class="btn" href="#sun">Zobraziť recept ↓</a>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Recepty</h2>
+
+  <section class="recipe" id="mon">
+    <h2>Pondelok večer — Treska al ajillo s pečenou paprikou a zemiakmi</h2>
+    <div class="meta">Varí sa pondelok večer, na utorňajší + stredajší obed (v pondelok sa nekonzumuje) · Aktívny čas ~30 min · dávka pre 4 osoby na 2 obedy · ryba tohto týždňa · inšpirácia: Ducasse (klasická technika)</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
+    <ul>
+      <li>900 g bieleho rybieho filé (treska alebo mieňava), na väčšie kusy</li>
+      <li>8 strúčikov cesnaku, na plátky</li>
+      <li>štipka sušených čili vločiek (voliteľné)</li>
+      <li>100 ml olivový olej + trocha na pečenie zeleniny</li>
+      <li>100 ml biele víno</li>
+      <li>2 papriky (červená, žltá), na prúžky</li>
+      <li>700 g zemiakov, na kocky</li>
+      <li>citrón, petržlenová vňať</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Rúru/air fryer nahrej na 200 °C, zemiaky premiešaj s olejom a soľou, pieč ~25 min do zlatista.</li>
+      <li>Papriky opeč na panvici alebo air fryeri ~8 min do zmäknutia, odlož.</li>
+      <li>Na panvici rozohrej olivový olej, na miernom ohni opraž plátky cesnaku a čili ~2 min (nesmú zhorknúť).</li>
+      <li>Zalej vínom, nechaj mierne odpariť, jemne osoľ.</li>
+      <li>Vlož rybu, dus jemne v oleji a šťave ~6–8 min do uvarenia, nepremiešavaj prudko, nech sa nerozpadne.</li>
+      <li>Servíruj rybu s cesnakovým olejom na zemiakoch a paprike, dochuť citrónom a vňaťou. Nechaj vychladnúť, opatrne rozdeľ do krabičiek na 2 obedy.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste (Ducasse): šupky zo zemiakov opeč na air fryeri s olejom a soľou ako chrumkavý snack alebo prílohu.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="tue">
+    <h2>Utorok — Treska al ajillo (zo zvyškov, deň 1)</h2>
+    <div class="meta">Z pondelkového varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2 min na 500–600 W (nižší výkon, aby sa ryba nerozvarila), v polovici skontrolovať a prípadne dohriať po 30 s.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="wed">
+    <h2>Streda — obed: treska al ajillo (zo zvyškov, deň 2) · večer: Bravčový paprikáš</h2>
+    <div class="meta">Obed z pondelkovej dávky (posledný deň). Paprikáš sa varí stredu večer, na štvrtkový + piatkový obed (v stredu sa nekonzumuje) · Aktívny čas ~30 min · dávka pre 4 osoby na 2 obedy · z chudého bravčového karé · inšpirácia: Munk (netradičné korenenie)</div>
+    <h4>Suroviny (na 2 obedy, 4 osoby)</h4>
+    <ul>
+      <li>1 kg chudé bravčové karé bez kosti, na kocky</li>
+      <li>3 cibule, na kocky</li>
+      <li>3 strúčiky cesnaku</li>
+      <li>3 PL sladkej mletej papriky</li>
+      <li>1 ČL rasce</li>
+      <li>2 papriky (červená, žltá), na prúžky</li>
+      <li>400 ml vývar</li>
+      <li>300 g kyslej smotany</li>
+      <li>400 g cestovín alebo halušiek</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Cibuľu opraž doskla na oleji, pridaj cesnak a mletú papriku, krátko opraž (pozor, nech nezhorkne).</li>
+      <li>Pridaj karé, opeč zvonka, zalej vývarom, pridaj rascu a papriku, dus ~15 min do mäkka (karé je chudšie, nepreváraj, nech nevyschne).</li>
+      <li>Medzitým uvar cestoviny/halušky.</li>
+      <li>Odstav z ohňa, vmiešaj kyslú smotanu (netop, aby sa nezrazila).</li>
+      <li>Nechaj vychladnúť, rozdeľ do krabičiek na 2 obedy, prílohu ulož zvlášť.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste: šupky z cibule a stopky papriky zamraz do vrecka na budúci zeleninový vývar.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="thu">
+    <h2>Štvrtok — Bravčový paprikáš (zo zvyškov, deň 1)</h2>
+    <div class="meta">Zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2 min na 800 W, premiešať v polovici. Cestoviny zohrej zvlášť ~1 min.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="fri">
+    <h2>Piatok — Bravčový paprikáš (zo zvyškov, deň 2)</h2>
+    <div class="meta">Posledná porcia zo stredajšieho varenia · obed do práce aj domov</div>
+    <div class="note-box mw">🍽️ MW: 2 min na 800 W, premiešať v polovici.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="sat">
+    <h2>Sobota — Kokosovo-kari cestoviny s cícerom, batátmi a vajcom</h2>
+    <div class="meta">Varí sa a je rovno na sobotňajší obed, samostatné (nič nepresahuje) · Aktívny čas ~30 min · 4 porcie, vegetariánske · cestoviny (nové pravidlo pre sobotu) · inšpirácia: Redzepi (sezónnosť), Munk (korenenie)</div>
+    <h4>Suroviny</h4>
+    <ul>
+      <li>350 g krátkych cestovín (fusilli/penne)</li>
+      <li>2 konzervy cíceru (800 g), scedené</li>
+      <li>500 g batátov, na kocky</li>
+      <li>300 g čerstvého špenátu</li>
+      <li>1 cibuľa, 3 strúčiky cesnaku, kúsok zázvoru (~3 cm)</li>
+      <li>1 ČL kurkumy, 1 ČL mletého kumínu, 1 ČL mletej koriandry, čili podľa chuti</li>
+      <li>400 ml kokosové mlieko</li>
+      <li>4–8 vajec (1–2 na osobu)</li>
+      <li>čerstvá koriandra</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Cestoviny uvar podľa návodu, scedi (trochu vody na riedenie si nechaj bokom).</li>
+      <li>Cibuľu, cesnak a zázvor opraž doskla na oleji, pridaj korenie, krátko opraž (30 s).</li>
+      <li>Pridaj batáty a kokosové mlieko, dus 12–15 min do zmäknutia batátov.</li>
+      <li>Pridaj cícer a špenát, dus ďalších 5 min, dochuť soľou.</li>
+      <li>Vmiešaj uvarené cestoviny do omáčky, podľa potreby zriedi vodou z cestovín.</li>
+      <li>Vajcia uvar namäkko alebo opraž na panvici podľa chuti, polož navrch, posyp koriandrou.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste: šupky z batátov a zázvoru opeč na air fryeri na chrumkavý topping, alebo zamraz na budúci vývar.</div>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <section class="recipe" id="sun">
+    <h2>Nedeľa — Juhoamerické grilované kura "a la brasa" s aji verde</h2>
+    <div class="meta">Varí sa a je na nedeľný obed, zvyšky pokryjú aj pondelňajší obed (31. 8.) · Prep ~1 h (vrátane marinovania) · 4 porcie, škálovateľné na 5 · inšpirácia: Ramsay (disciplína grilovacej techniky), Redzepi (bylinky a citrusy)</div>
+    <h4>Suroviny (4–5 porcií, + rezerva na pondelok)</h4>
+    <ul>
+      <li>1,8 kg kuracie stehná s kosťou</li>
+      <li>marináda: 4 strúčiky cesnaku (pretlačené), šťava z 2 limetiek, 2 PL sójovej omáčky, 2 PL oleja, 1 ČL rasce, 1 ČL sladkej papriky, čierne korenie</li>
+      <li>aji verde: veľký zväzok čerstvej koriandry, 1–2 zelené čili/jalapeño, 2 strúčiky cesnaku, šťava z 1 limetky, 3 PL majonézy, 50 g fety, 2 PL olivového oleja</li>
+      <li>2 konzervy čiernej fazule (800 g), 1 cibuľa, 1 ČL rasce</li>
+      <li>400 g ryže</li>
+      <li>limetka na dozdobenie</li>
+    </ul>
+    <h4>Postup</h4>
+    <ol>
+      <li>Kura marinuj v zmesi cesnaku, limetky, sójovej omáčky a korenia aspoň 20–30 min (ideálne dlhšie).</li>
+      <li>Gril/rúra na 200 °C, grilluj/pieč 35–40 min do prepečenia a zlatista.</li>
+      <li>Aji verde: koriandru, čili, cesnak, limetku, majonézu a fetu rozmixuj dohladka.</li>
+      <li>Fazuľu podus s osmaženou cibuľou a rascou ~10 min.</li>
+      <li>Uvar ryžu v ryžovare. Servíruj kura na ryži s fazuľou, polej aji verde, dozdob limetkou. Zvyšné porcie odlož na pondelňajší obed.</li>
+    </ol>
+    <div class="note-box zero">🌿 Zero waste (Redzepi): stopky koriandry použi priamo v aji verde namiesto vyhodenia, kosti z kuraťa a šupky z limetky zamraz na budúci vývar/marinádu.</div>
+    <p><b>Pre 5 (ak príde babka):</b> +1 porcia bielkoviny a hrsť zeleniny navyše.</p>
+    <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
+  </section>
+
+  <h2 class="section-title" id="shopping">Nákupný zoznam</h2>
+  <p style="font-size:0.9rem;color:var(--muted);margin-top:-8px;">Do odvolania nakupujeme na <b>tri samostatné dni</b> namiesto jedného veľkého nákupu — čerstvé mäso a zelenina sa kupujú čo najbližšie k dňu varenia. Odhad nákladov na hlavné suroviny tohto plánu spolu za všetky tri nákupy: ~95–115 € (z mesačného budgetu 500 €).</p>
+
+  <div class="shop-block">
+    <h3 class="shop-subtitle">🛒 Piatok 21. 8., podvečer po 17:00 (Kaufland) — veľký nákup</h3>
+    <p class="shop-when"><b>Poznámka:</b> sobotňajší recept (levantské kura s hummusom) zostáva na stránke, ale tento týždeň sa varilo nedávno, takže sa naň dnes NEKUPUJE — bude ad-hoc z toho, čo je doma. Nákup nižšie je len na NEDEĽU (23. 8., karibské jerk kura) + zásoba na celý budúci týždeň (24.–30. 8.).</p>
+    <div class="shop-cols">
+      <div class="shop-group">
+        <h4>🥩 Mäso — na nedeľu (Ne 23.8)</h4>
+        <label><input type="checkbox"> Kuracie stehná/paličky s kosťou — 1,8 kg (nedeľa, karibské jerk kura)</label>
+      </div>
+      <div class="shop-group">
+        <h4>🥦 Zelenina, ovocie a bylinky — na nedeľu</h4>
+        <label><input type="checkbox"> Cibuľa — 1 ks</label>
+        <label><input type="checkbox"> Cesnak — 4 strúčiky</label>
+        <label><input type="checkbox"> Limetky — 2 ks</label>
+        <label><input type="checkbox"> Zázvor — 1 kúsok</label>
+        <label><input type="checkbox"> Jarná cibuľka — 1 zväzok</label>
+      </div>
+      <div class="shop-group">
+        <h4>🥫 Trvanlivé, strukoviny, konzervy (nedeľa + zásoba na celý budúci týždeň)</h4>
+        <label><input type="checkbox"> Cícer — 2 konzervy, 800 g (na budúcotýždňovú sobotu)</label>
+        <label><input type="checkbox"> Med — malý pohár (na nedeľňajšiu jerk marinádu)</label>
+        <label><input type="checkbox"> Červená fazuľa — 1 konzerva, 400 g (na túto nedeľu)</label>
+        <label><input type="checkbox"> Čierna fazuľa — 2 konzervy, 800 g (na budúcotýždňovú nedeľu)</label>
+        <label><input type="checkbox"> Kokosové mlieko — 2 plechovky, 800 ml (1× táto nedeľa, 1× budúcotýždňová sobota)</label>
+        <label><input type="checkbox"> Sójová omáčka</label>
+        <label><input type="checkbox"> Biele víno alebo sherry ocot — 100 ml (na budúcotýždňové pondelkové kura)</label>
+        <label><input type="checkbox"> Olivový olej</label>
+      </div>
+      <div class="shop-group">
+        <h4>🌾 Obiloviny a cestoviny</h4>
+        <label><input type="checkbox"> Ryža — 800 g (400 g táto nedeľa + 400 g budúcotýždňová nedeľa)</label>
+        <label><input type="checkbox"> Krátke cestoviny (fusilli/penne) — 350 g (budúcotýždňová sobota)</label>
+        <label><input type="checkbox"> Cestoviny alebo halušky — 400 g (budúcotýždňová streda)</label>
+      </div>
+      <div class="shop-group">
+        <h4>🧂 Koreniny (skontroluj zásobu)</h4>
+        <label><input type="checkbox"> Rasca</label>
+        <label><input type="checkbox"> Sladká mletá paprika</label>
+        <label><input type="checkbox"> Sumak (alebo navyše sladká paprika ako náhrada)</label>
+        <label><input type="checkbox"> Škorica</label>
+        <label><input type="checkbox"> Nové korenie</label>
+        <label><input type="checkbox"> Údená paprika (pimentón)</label>
+        <label><input type="checkbox"> Kurkuma</label>
+        <label><input type="checkbox"> Mletý kumín</label>
+        <label><input type="checkbox"> Mletá koriandra</label>
+        <label><input type="checkbox"> Čierne korenie</label>
+        <label><input type="checkbox"> Bobkový list</label>
+      </div>
+    </div>
+    <div class="keep-box">
+      <b>Text na skopírovanie do Google Keep:</b>
+      <textarea id="keepFri" readonly>NÁKUPNÝ ZOZNAM – PIATOK 21. 8. 2026 (len nedeľa + zásoba na budúci týždeň; sobota sa nekupuje, robilo sa nedávno, bude ad-hoc z domácich zásob)
+
+MÄSO (na nedeľu Ne 23.8)
+- Kuracie stehná/paličky s kosťou – 1,8 kg (nedeľa, karibské jerk kura)
+
+ZELENINA, OVOCIE A BYLINKY (na nedeľu)
+- Cibuľa – 1 ks
+- Cesnak – 4 strúčiky
+- Limetky – 2 ks
+- Zázvor – 1 kúsok
+- Jarná cibuľka – 1 zväzok
+
+TRVANLIVÉ / STRUKOVINY / KONZERVY (nedeľa + zásoba na budúci týždeň)
+- Cícer – 2 konzervy, 800 g (budúci týždeň)
+- Med – malý pohár
+- Červená fazuľa – 1 konzerva, 400 g
+- Čierna fazuľa – 2 konzervy, 800 g (budúci týždeň)
+- Kokosové mlieko – 2 plechovky, 800 ml
+- Sójová omáčka
+- Biele víno alebo sherry ocot – 100 ml (budúci týždeň)
+- Olivový olej
+
+OBILOVINY A CESTOVINY
+- Ryža – 800 g (400 g táto nedeľa + 400 g budúca nedeľa)
+- Krátke cestoviny (fusilli/penne) – 350 g (budúca sobota)
+- Cestoviny/halušky – 400 g (budúca streda)
+
+KORENINY (skontroluj zásobu)
+- Škorica, nové korenie, rasca, sladká mletá paprika, údená paprika (pimentón), kurkuma, mletý kumín, mletá koriandra, čierne korenie, bobkový list
+
+POZN.: levantské kura (sobota) sa dnes nekupuje – robilo sa nedávno, bude ad-hoc z toho čo je doma. Recept ostáva na stránke pre niekoho iného/nabudúce. Batáty, špenát, vajcia, feta, majonéza a kura na budúcotýždňovú sobotu/nedeľu (29.–30. 8.) sa tiež nekupujú dnes – tie budú na budúcopiatkovom (28. 8.) zozname.</textarea>
+      <br>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('keepFri').value); this.textContent='Skopírované ✓'; setTimeout(()=>this.textContent='Kopírovať text',1500)">Kopírovať text</button>
+    </div>
+  </div>
+
+  <div class="shop-block">
+    <h3 class="shop-subtitle">🛒 Pondelok 24. 8., podvečer — čerstvé na pondelkové varenie</h3>
+    <p class="shop-when">Iba čerstvá ryba a zelenina pre tresku al ajillo (varí sa pondelok večer).</p>
+    <div class="shop-cols">
+      <div class="shop-group">
+        <h4>🐟 Ryba</h4>
+        <label><input type="checkbox"> Biele rybie filé (treska/mieňava) — 900 g</label>
+      </div>
+      <div class="shop-group">
+        <h4>🥦 Zelenina a bylinky</h4>
+        <label><input type="checkbox"> Cesnak — 8 strúčikov</label>
+        <label><input type="checkbox"> Papriky (červená, žltá) — 2 ks</label>
+        <label><input type="checkbox"> Zemiaky — 700 g</label>
+        <label><input type="checkbox"> Citrón — 1 ks</label>
+        <label><input type="checkbox"> Petržlenová vňať — 1 zväzok</label>
+      </div>
+    </div>
+    <div class="keep-box">
+      <b>Text na skopírovanie do Google Keep:</b>
+      <textarea id="keepMon" readonly>NÁKUPNÝ ZOZNAM – PONDELOK 24. 8. 2026 (čerstvé na večerné varenie)
+
+RYBA
+- Biele rybie filé (treska/mieňava) – 900 g
+
+ZELENINA A BYLINKY
+- Cesnak – 8 strúčikov
+- Papriky (červená, žltá) – 2 ks
+- Zemiaky – 700 g
+- Citrón – 1 ks
+- Petržlenová vňať – 1 zväzok</textarea>
+      <br>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('keepMon').value); this.textContent='Skopírované ✓'; setTimeout(()=>this.textContent='Kopírovať text',1500)">Kopírovať text</button>
+    </div>
+  </div>
+
+  <div class="shop-block">
+    <h3 class="shop-subtitle">🛒 Streda 26. 8., podvečer — čerstvé na stredajšie varenie</h3>
+    <p class="shop-when">Iba čerstvé mäso a zelenina pre bravčový paprikáš (varí sa streda večer).</p>
+    <div class="shop-cols">
+      <div class="shop-group">
+        <h4>🥩 Mäso</h4>
+        <label><input type="checkbox"> Chudé bravčové karé bez kosti — 1 kg</label>
+      </div>
+      <div class="shop-group">
+        <h4>🥦 Zelenina</h4>
+        <label><input type="checkbox"> Cibuľa — 3 ks</label>
+        <label><input type="checkbox"> Cesnak — 3 strúčiky</label>
+        <label><input type="checkbox"> Papriky (červená, žltá) — 2 ks</label>
+      </div>
+      <div class="shop-group">
+        <h4>🧀 Mliečne</h4>
+        <label><input type="checkbox"> Kyslá smotana — 300 g</label>
+      </div>
+    </div>
+    <div class="keep-box">
+      <b>Text na skopírovanie do Google Keep:</b>
+      <textarea id="keepWed" readonly>NÁKUPNÝ ZOZNAM – STREDA 26. 8. 2026 (čerstvé na večerné varenie)
+
+MÄSO
+- Chudé bravčové karé bez kosti – 1 kg
+
+ZELENINA
+- Cibuľa – 3 ks
+- Cesnak – 3 strúčiky
+- Papriky (červená, žltá) – 2 ks
+
+MLIEČNE
+- Kyslá smotana – 300 g</textarea>
+      <br>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('keepWed').value); this.textContent='Skopírované ✓'; setTimeout(()=>this.textContent='Kopírovať text',1500)">Kopírovať text</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">Predchádzajúce týždne</h2>
+  <ul>
+    <li><a href="archiv/2026-08-17.html">17.–23. 8. 2026</a></li>
+    <li><a href="archiv/2026-08-10.html">10.–16. 8. 2026</a></li>
+  </ul>
+
+  <footer>
+    Budúci týždeň v rotácii: mexická, vietnamská, japonská a kórejská kuchyňa. Brief so všetkými pravidlami: <code>rodinny-jedalnicek-brief.md</code>.
+  </footer>
+
+</div>
+
+</body>
+</html>

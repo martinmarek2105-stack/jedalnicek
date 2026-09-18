@@ -186,7 +186,7 @@
   table.week-table th, table.week-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
   table.week-table th { background: #f6ece0; color: var(--terracotta-dark); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
   table.week-table tr:last-child td { border-bottom: none; }
-  table.week-table td.wk-leftover { color: var(--muted); }
+  table.week-table td.wk-leftover, table.week-table tr.wk-leftover td { color: var(--muted); }
   table.week-table a { color: var(--terracotta-dark); font-weight: 600; text-decoration: none; }
   table.week-table a:hover { text-decoration: underline; }
   table.week-table .wk-badge { font-size: 0.72rem; color: var(--muted); }
@@ -231,66 +231,62 @@
   <div class="week-table-wrap">
     <table class="week-table">
       <thead>
-        <tr><th>Deň</th><th>Recept</th><th>Kuchyňa</th><th>Nákup</th></tr>
+        <tr><th>Deň</th><th>Obed — čo v ten deň jem</th><th>Večer — čo v ten deň varím</th><th>Kuchyňa</th><th>Nákup</th></tr>
       </thead>
       <tbody>
         <tr class="wk-leftover">
-          <td>Po 21. 9.</td>
+          <td>Pondelok 21. 9.</td>
           <td>Mimo rozpisu <span class="wk-badge">(varí manželka)</span></td>
           <td>—</td>
-          <td>—</td>
-        </tr>
-        <tr class="wk-leftover">
-          <td>Ut 22. 9. obed</td>
-          <td>Mimo rozpisu <span class="wk-badge">(zvyšky, posledný deň)</span></td>
           <td>—</td>
           <td>—</td>
         </tr>
         <tr>
-          <td>Ut 22. 9. večer <span class="wk-badge">varí sa</span></td>
-          <td><a href="#tue">Losos s tahini omáčkou</a></td>
+          <td>Utorok 22. 9.</td>
+          <td class="wk-leftover">Mimo rozpisu <span class="wk-badge">(posledný deň)</span></td>
+          <td>🍳 <a href="#tue">Losos s tahini omáčkou</a> <span class="wk-badge">(na streda + štvrtok)</span></td>
           <td>Arabská (levantská)</td>
           <td>Ut 22. 9.</td>
         </tr>
         <tr class="wk-leftover">
-          <td>St 23. 9.</td>
+          <td>Streda 23. 9.</td>
           <td><a href="#tue">Losos s tahini omáčkou</a> <span class="wk-badge">(zvyšky)</span></td>
-          <td>Arabská (levantská)</td>
           <td>—</td>
-        </tr>
-        <tr class="wk-leftover">
-          <td>Št 24. 9. obed</td>
-          <td><a href="#tue">Losos s tahini omáčkou</a> <span class="wk-badge">(zvyšky)</span></td>
           <td>Arabská (levantská)</td>
           <td>—</td>
         </tr>
         <tr>
-          <td>Št 24. 9. večer <span class="wk-badge">varí sa</span></td>
-          <td><a href="#thu">Bravčové medailóniky</a></td>
+          <td>Štvrtok 24. 9.</td>
+          <td class="wk-leftover"><a href="#tue">Losos s tahini omáčkou</a> <span class="wk-badge">(zvyšky, posledný deň)</span></td>
+          <td>🍳 <a href="#thu">Bravčové medailóniky</a> <span class="wk-badge">(na piatok)</span></td>
           <td>Juhoamerická</td>
           <td>Št 24. 9.</td>
         </tr>
         <tr class="wk-leftover">
-          <td>Pi 25. 9.</td>
+          <td>Piatok 25. 9.</td>
           <td><a href="#thu">Bravčové medailóniky</a> <span class="wk-badge">(zvyšky)</span></td>
+          <td>—</td>
           <td>Juhoamerická</td>
           <td>—</td>
         </tr>
         <tr>
-          <td>So 26. 9. <span class="wk-badge">varí sa</span></td>
-          <td><a href="#sat">Soupe au Pistou</a></td>
+          <td>Sobota 26. 9.</td>
+          <td>🍳 <a href="#sat">Soupe au Pistou</a> <span class="wk-badge">(varí sa a je v ten istý deň)</span></td>
+          <td>—</td>
           <td>Mediteránska — Francúzsko</td>
           <td>budúci beh</td>
         </tr>
         <tr>
-          <td>Ne 27. 9. <span class="wk-badge">varí sa</span></td>
-          <td><a href="#sun">Kačacie stehná s pečenou tekvicou</a></td>
+          <td>Nedeľa 27. 9.</td>
+          <td>🍳 <a href="#sun">Kačacie stehná s pečenou tekvicou</a> <span class="wk-badge">(varí sa a je v ten istý deň)</span></td>
+          <td>—</td>
           <td>Čínska</td>
           <td>budúci beh</td>
         </tr>
       </tbody>
     </table>
   </div>
+  <p style="font-size:0.85rem;color:var(--muted);margin-top:-24px;margin-bottom:40px;">🍳 = v ten deň sa niečo varí (cez víkend rovno na obed; cez týždeň večer na neskoršie dni — vtedy sa to v deň varenia ešte neje, len sa pripraví do krabičiek).</p>
 
   <h2 class="section-title">Recepty</h2>
 

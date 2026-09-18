@@ -174,6 +174,41 @@
     cursor: pointer;
   }
   footer { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 40px; }
+
+  .week-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--cream-card);
+  }
+  table.week-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  table.week-table th, table.week-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.week-table th { background: #f6ece0; color: var(--terracotta-dark); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  table.week-table tr:last-child td { border-bottom: none; }
+  table.week-table td.wk-leftover { color: var(--muted); }
+  table.week-table a { color: var(--terracotta-dark); font-weight: 600; text-decoration: none; }
+  table.week-table a:hover { text-decoration: underline; }
+  table.week-table .wk-badge { font-size: 0.72rem; color: var(--muted); }
+
+  .recipe-search { margin-bottom: 14px; }
+  .recipe-search input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: var(--cream-card);
+    color: var(--ink);
+  }
+  ul.recipe-index-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--cream-card); }
+  ul.recipe-index-list li { padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+  ul.recipe-index-list li:last-child { border-bottom: none; }
+  ul.recipe-index-list a { color: var(--terracotta-dark); font-weight: 600; text-decoration: none; }
+  ul.recipe-index-list a:hover { text-decoration: underline; }
+  .ri-cuisine { font-size: 0.78rem; color: var(--olive); background: #e7ede0; padding: 2px 8px; border-radius: 999px; }
+  .ri-week { font-size: 0.76rem; color: var(--muted); margin-left: auto; }
+  .ri-empty { padding: 14px 16px; color: var(--muted); font-size: 0.88rem; display: none; }
 </style>
 </head>
 <body>
@@ -188,73 +223,71 @@
   <div class="rhythm-note">
     Tento plán rieši <b>len obedy</b> (do práce aj domov) — večere si rodina kryje samostatne (studené/jednoduché), nie sú súčasťou tohto jedálnička. Od 1. 9. 2026 sú deti cez týždeň v školskej jedálni, preto sa <b>pondelok–piatok varí/porcuje len pre 2 osoby</b> (rodičia), cez víkend pre celú rodinu (4, každú druhú nedeľu +1 babka). Rytmus: <b>nedeľa</b> varí obed pre celú rodinu a zvyšky pokrývajú AJ pondelňajší AJ utorňajší obed (3 dni z jedného varenia). <b>Utorok večer</b> sa varí nová (menšia) dávka pre 2, ktorá pokrýva stredajší + štvrtkový obed. <b>Štvrtok večer</b> sa varí ešte menšia dávka pre 2, len na piatkový obed. <b>Sobota</b> varí znova pre celú rodinu, samostatne.
     <br><br>
-    <b>Mäso je tento týždeň presne na hranici limitu 4 dni</b> (nedeľné kura na kosti = 3 z 4 povolených dní, plus piatková dávka = 1 deň) — utorkovo-večerná dávka je preto rybia a sobota je zámerne nemäsová (strukoviny). Sobotňajšia "cestovinová" preferencia je naplnená autenticky francúzskou polievkou s drobnými cestovinami (soupe au pistou) namiesto vynúteného talianskeho variantu.
+    <b>Bielkoviny sa od tohto týždňa rotujú naprieč týždňami presne podľa vzorca</b> (starší mäsový limit 4 dni/týždeň je zrušený) — po viacerých týždňoch kuracieho mäsa na nedeľu prichádza na rad kačacie: pečené kačacie stehná na kosti. Utorkovo-večerná dávka je rybia (biela ryba, bez škorice — tá sa v tomto pláne s mäsom ani rybou už nekombinuje), sobota je zámerne nemäsová (strukoviny + cestoviny). Sobotňajšia "cestovinová" preferencia je naplnená autenticky francúzskou polievkou s drobnými cestovinami (soupe au pistou) namiesto vynúteného talianskeho variantu.
   </div>
 
-  <div class="day-grid">
-
-    <div class="card skip">
-      <div class="date">Pondelok 21. 9. · obed netreba variť</div>
-      <h3>Obed z nedele (zvyšky)</h3>
-      <div class="tags"><span class="tag skip">netreba recept</span><span class="tag">pre 2</span></div>
-      <p class="teaser">Obed je z minulotýždňového nedeľného varenia (Gai Yang — thajské grilované kura na kosti s jazmínovou ryžou a slawom). Utorok je posledný deň týchto zvyškov, varí sa až utorok večer.</p>
-    </div>
-
-    <div class="card skip">
-      <div class="date">Utorok 22. 9. · obed netreba variť (posledný deň)</div>
-      <h3>Obed z nedele (zvyšky, deň 2)</h3>
-      <div class="tags"><span class="tag skip">netreba recept</span><span class="tag">pre 2</span></div>
-      <p class="teaser">Posledná porcia thajského Gai Yang z minulého týždňa. Večer sa varí nová dávka (Arabská/levantská kuchyňa, ryba) — na stredajší a štvrtkový obed, viď nižšie.</p>
-    </div>
-
-    <div class="card">
-      <div class="date">Utorok 22. 9. večer · varí sa (pre 2, na 2 obedy)</div>
-      <h3>Sayadieh — libanonská ryba s karamelizovanou cibuľovou ryžou</h3>
-      <div class="tags"><span class="tag">Arabská (levantská) kuchyňa</span><span class="tag office">do kancelárie OK</span><span class="tag">🐟 ryba týždňa</span></div>
-      <p class="teaser">Biele rybie filé okorenené rascou, škoricou a citrónovou kôrou, podávané na ryži uvarenej v tmavo karamelizovanej cibuľovej vode, s chrumkavou cibuľkou a mandľovými lupienkami navrchu. Varí sa utorok večer, menšia dávka na stredajší AJ štvrtkový obed pre 2 osoby.</p>
-      <a class="btn" href="#tue">Zobraziť recept ↓</a>
-    </div>
-
-    <div class="card">
-      <div class="date">Streda 23. 9. · obed zo zvyškov (deň 1)</div>
-      <h3>Sayadieh</h3>
-      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
-      <p class="teaser">Utorková ryba na cibuľovej ryži, jemne zohriata v MW (nízky výkon, aby sa ryba nerozvarila).</p>
-      <a class="btn" href="#wed">Zobraziť recept ↓</a>
-    </div>
-
-    <div class="card">
-      <div class="date">Štvrtok 24. 9. · obed zo zvyškov (deň 2) + večer varí sa</div>
-      <h3>Sayadieh obed / Juhoamerická večera</h3>
-      <div class="tags"><span class="tag leftover">obed: zo zvyškov</span><span class="tag">večer: Juhoamerická kuchyňa</span></div>
-      <p class="teaser">Na obed sa dojedá Sayadieh, posledný deň. Večer sa varí úplne nová, malá dávka — argentínska bravčová milanesa — len na piatkový obed pre 2 osoby.</p>
-      <a class="btn" href="#thu">Zobraziť recept ↓</a>
-    </div>
-
-    <div class="card">
-      <div class="date">Piatok 25. 9. · obed zo štvrtkového varenia</div>
-      <h3>Milanesa de Lomo (argentínsky bravčový rezeň)</h3>
-      <div class="tags"><span class="tag leftover">zo zvyškov</span><span class="tag office">do kancelárie OK</span></div>
-      <p class="teaser">Zo štvrtkového varenia, jediný deň, žiadny ďalší presah. Chrumkavý rezeň z panenky, ideálne prenosný do práce s citrónom.</p>
-      <a class="btn" href="#fri">Zobraziť recept ↓</a>
-    </div>
-
-    <div class="card">
-      <div class="date">Sobota 26. 9. · varí sa na obed</div>
-      <h3>Soupe au Pistou — provensálska zeleninová polievka s cestovinami</h3>
-      <div class="tags"><span class="tag">Mediteránska kuchyňa — Francúzsko</span><span class="tag">🍝 cestoviny (Francúzsko)</span><span class="tag">🫘 nemäsový deň</span></div>
-      <p class="teaser">Letná zelenina (zelené fazuľky, cuketa, mrkva, zemiaky) a biele fazule v ľahkom vývare s drobnými cestovinami, dochutená čerstvým bazalkovo-cesnakovým pistou s parmezánom. Len na sobotňajší obed, samostatné, pre celú rodinu.</p>
-      <a class="btn" href="#sat">Zobraziť recept ↓</a>
-    </div>
-
-    <div class="card">
-      <div class="date">Nedeľa 27. 9. · varí sa na obed</div>
-      <h3>San Bei Ji — čínske kura na kosti "v troch pohároch"</h3>
-      <div class="tags"><span class="tag">Čínska kuchyňa</span><span class="tag">nedeľný obed</span><span class="tag">🦴 mäso s kosťou</span></div>
-      <p class="teaser">Kuracie stehná na kosti dusené dozlata v sezamovom oleji, ryžovom víne, sójovej omáčke a cukre, s cesnakom, zázvorom a hrsťou čerstvej bazalky na záver, podávané s ryžou. Škálovateľné na 5. Zvyšky pokryjú AJ pondelňajší AJ utorňajší obed (28.–29. 9.).</p>
-      <a class="btn" href="#sun">Zobraziť recept ↓</a>
-    </div>
-
+  <div class="week-table-wrap">
+    <table class="week-table">
+      <thead>
+        <tr><th>Deň</th><th>Recept</th><th>Kuchyňa</th><th>Nákup</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wk-leftover">
+          <td>Po 21. 9.</td>
+          <td><a href="archiv/2026-09-14.html#sun">Gai Yang</a> <span class="wk-badge">(zvyšky)</span></td>
+          <td>Thajská</td>
+          <td>—</td>
+        </tr>
+        <tr class="wk-leftover">
+          <td>Ut 22. 9. obed</td>
+          <td><a href="archiv/2026-09-14.html#sun">Gai Yang</a> <span class="wk-badge">(zvyšky, posl. deň)</span></td>
+          <td>Thajská</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Ut 22. 9. večer <span class="wk-badge">varí sa</span></td>
+          <td><a href="#tue">Sayadieh</a></td>
+          <td>Arabská (levantská)</td>
+          <td>Ut 22. 9.</td>
+        </tr>
+        <tr class="wk-leftover">
+          <td>St 23. 9.</td>
+          <td><a href="#tue">Sayadieh</a> <span class="wk-badge">(zvyšky)</span></td>
+          <td>Arabská (levantská)</td>
+          <td>—</td>
+        </tr>
+        <tr class="wk-leftover">
+          <td>Št 24. 9. obed</td>
+          <td><a href="#tue">Sayadieh</a> <span class="wk-badge">(zvyšky)</span></td>
+          <td>Arabská (levantská)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Št 24. 9. večer <span class="wk-badge">varí sa</span></td>
+          <td><a href="#thu">Milanesa de Lomo</a></td>
+          <td>Juhoamerická</td>
+          <td>Št 24. 9.</td>
+        </tr>
+        <tr class="wk-leftover">
+          <td>Pi 25. 9.</td>
+          <td><a href="#thu">Milanesa de Lomo</a> <span class="wk-badge">(zvyšky)</span></td>
+          <td>Juhoamerická</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>So 26. 9. <span class="wk-badge">varí sa</span></td>
+          <td><a href="#sat">Soupe au Pistou</a></td>
+          <td>Mediteránska — Francúzsko</td>
+          <td>budúci beh</td>
+        </tr>
+        <tr>
+          <td>Ne 27. 9. <span class="wk-badge">varí sa</span></td>
+          <td><a href="#sun">Kačacie stehná so sójovou glazúrou</a></td>
+          <td>Čínska</td>
+          <td>budúci beh</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <h2 class="section-title">Recepty</h2>
@@ -267,8 +300,8 @@
       <li>400 g bieleho rybieho filé (treska alebo morský vlk)</li>
       <li>250 g dlhozrnnej ryže (ideálne basmati, inak bežná dlhozrnná)</li>
       <li>2 väčšie cibule, na tenké pol-kolieska</li>
-      <li>1 ČL mletej rasce</li>
-      <li>1/2 ČL mletej škorice</li>
+      <li>1 a 1/2 ČL mletej rasce</li>
+      <li>1/2 ČL mletého koriandra (semienka)</li>
       <li>1/2 ČL mletého nového korenia (ak nemáš, vynechaj alebo nahraď štipkou muškátového orieška)</li>
       <li>1/4 ČL mletého čierneho korenia</li>
       <li>1 citrón (šťava + trocha kôry)</li>
@@ -279,8 +312,8 @@
     <h4>Postup</h4>
     <ol>
       <li>Cibuľu nakrájaj na tenké pol-kolieska a pomaly restuj na oleji na miernom ohni ~20 min do tmavohnedej karamelizácie, občas premiešaj — základ celej chuti.</li>
-      <li>Rybu okoreň rascou, škoricou, novým korením, čiernym korením, soľou a citrónovou kôrou. Opeč nakrátko na panvici alebo zapeč v rúre pri 200 °C ~10 min do prepečenia.</li>
-      <li>Tretinu karamelizovanej cibule pridaj do vody na varenie ryže (spolu so štipkou rasce a škorice), uvar ryžu dohladka. Zvyšnú cibuľu nechaj bokom ako chrumkavú ozdobu.</li>
+      <li>Rybu okoreň rascou, mletým koriandrom, novým korením, čiernym korením, soľou a citrónovou kôrou. Opeč nakrátko na panvici alebo zapeč v rúre pri 200 °C ~10 min do prepečenia.</li>
+      <li>Tretinu karamelizovanej cibule pridaj do vody na varenie ryže (spolu so štipkou rasce), uvar ryžu dohladka. Zvyšnú cibuľu nechaj bokom ako chrumkavú ozdobu.</li>
       <li>Mandľové lupienky opraž nasucho na panvici do zlatista.</li>
       <li>Rybu rozdeľ na porcie, podávaj na cibuľovej ryži, posyp chrumkavou cibuľou a mandľami, s kúskom citróna.</li>
       <li>Nechaj vychladnúť, rozdeľ do 2 krabičiek na stredajší a štvrtkový obed.</li>
@@ -363,34 +396,32 @@
   </section>
 
   <section class="recipe" id="sun">
-    <h2>Nedeľa — San Bei Ji (čínske kura na kosti "v troch pohároch")</h2>
-    <div class="meta">Varí sa a je na nedeľný obed, zvyšky pokryjú AJ pondelňajší AJ utorňajší obed (28.–29. 9.) · Aktívny čas ~40 min · 4 porcie, škálovateľné na 5 · kuracie na kosti · inšpirácia: Munk (odvážne, ale vyvážené korenenie)</div>
+    <h2>Nedeľa — Pekingské pečené kačacie stehná so zázvorovo-sójovou glazúrou</h2>
+    <div class="meta">Varí sa a je na nedeľný obed, zvyšky pokryjú AJ pondelňajší AJ utorňajší obed (28.–29. 9.) · Aktívny čas ~20 min + pečenie v rúre ~45 min · 4 porcie, škálovateľné na 5 · kačacie na kosti (týždeň po kuracom — bielkoviny sa teraz rotujú presne podľa vzorca, nielen kuracie) · inšpirácia: Ducasse (klasická technika pečenia, presnosť)</div>
     <h4>Suroviny (4–5 porcií nedeľa + rezerva na pondelok a utorok)</h4>
     <ul>
-      <li>1,7 kg kuracích stehien s kosťou (na kúsky, poprípade nechaj porezať u mäsiara)</li>
-      <li>veľký kúsok čerstvého zázvoru, na plátky</li>
-      <li>10 strúčikov cesnaku, celé</li>
-      <li>3 PL sezamového oleja</li>
-      <li>4 PL svetlej sójovej omáčky</li>
-      <li>2 PL tmavej sójovej omáčky (ak nemáš, nahraď svetlou sójovkou + 1 ČL cukru navyše kvôli farbe)</li>
-      <li>4 PL ryžového vína Shaoxing (v Trenčíne bežne nedostupné — nahraď suchým sherry, alebo zmesou vody a trošky ryžového/vínneho octu)</li>
-      <li>2 PL trstinového alebo hnedého cukru</li>
-      <li>1–2 sušené čili papričky, celé (voliteľné)</li>
-      <li>veľká hrsť čerstvej bazalky (thajská/ázijská bazalka sa v Trenčíne bežne nezoženie — bežná čerstvá bazalka funguje výborne)</li>
+      <li>4–5 kačacích stehien s kosťou (spolu cca 1,8–2 kg)</li>
+      <li>veľký kúsok čerstvého zázvoru, nastrúhaný</li>
+      <li>6 strúčikov cesnaku, pretlačených</li>
+      <li>4 PL sójovej omáčky</li>
+      <li>2 PL medu</li>
+      <li>1 PL sezamového oleja</li>
+      <li>2 badiány (hviezdicový aníz), jemne rozdrvené (ak nezoženieš, pokojne vynechaj — chuť funguje aj bez neho)</li>
+      <li>kôra a šťava z 1 pomaranča</li>
       <li>2 jarné cibuľky, na kolieska (na posyp)</li>
-      <li>500 g ryže (jazmínová alebo bežná dlhozrnná)</li>
+      <li>500 g hnedej ryže (pre zmenu oproti bielej — dlhšie varenie, cca 25–30 min)</li>
+      <li>soľ, čierne korenie</li>
     </ul>
     <h4>Postup</h4>
     <ol>
-      <li>V hrnci alebo hlbokej panvici rozohrej sezamový olej, opraž zázvor a celé strúčiky cesnaku dozlata a do vône (~2 min).</li>
-      <li>Pridaj kuracie kúsky kožou nadol, opeč z oboch strán do zhnednutia (~5–6 min).</li>
-      <li>Prilej svetlú aj tmavú sójovú omáčku, ryžové víno (alebo náhradu), cukor a sušené čili. Priveď do varu, priklop a dus na miernom ohni ~20 min, občas premiešaj.</li>
-      <li>Odklop a dus ešte 5–10 min bez pokrievky, aby sa omáčka zredukovala do lesklej, hustejšej konzistencie.</li>
-      <li>Stiahni z ohňa, vmiešaj bazalkové listy, nechaj ich len zvädnúť teplom (~1 min).</li>
-      <li>Uvar ryžu v ryžovare. Servíruj kura s ryžou, posyp jarnou cibuľkou. Zvyšné porcie odlož zvlášť na pondelňajší a utorňajší obed (2 osoby).</li>
+      <li>Kačacie stehná osoľ a nechaj aspoň 30 min (ideálne cez noc v chladničke, nezakryté) — pokožka sa tak lepšie vysuší a pri pečení bude chrumkavejšia.</li>
+      <li>Zmiešaj zázvor, cesnak, sójovú omáčku, med, sezamový olej, rozdrvený badián a pomarančovú kôru so šťavou na glazúru.</li>
+      <li>Kačacie stehná ulož kožou nahor na plech (ideálne s mriežkou, aby vytopený tuk odkvapkal), potri polovicou glazúry, pieč v rúre pri 200 °C ~40–45 min do zlatista a prepečenia. V polovici pečenia a tesne pred koncom ešte raz potri zvyšnou glazúrou.</li>
+      <li>Medzitým uvar hnedú ryžu.</li>
+      <li>Kačacie stehná servíruj na ryži, posyp jarnou cibuľkou. Zvyšné porcie odlož zvlášť na pondelňajší a utorňajší obed (2 osoby).</li>
     </ol>
-    <div class="note-box zero">🌿 Zero waste (Munk): kuracie kosti po dojedení a šupky zo zázvoru zamraz na budúci vývar; zvyšná bazalka sa dá zamraziť v kocke s trochou oleja.</div>
-    <p><b>Pre 5 (ak príde babka):</b> +1 kuracie stehno navyše a hrsť ryže navyše.</p>
+    <div class="note-box zero">🌿 Zero waste (Ducasse): kačacie kosti a odkvapkaný tuk po vypečení zamraz — tuk je výborný na budúce opekanie zemiakov, kosti na vývar; pomarančovú kôru tiež zamraz na budúce dochutenie.</div>
+    <p><b>Pre 5 (ak príde babka):</b> +1 kačacie stehno navyše a hrsť ryže navyše.</p>
     <p class="back-link"><a href="#top">↑ späť na prehľad</a></p>
   </section>
 
@@ -551,15 +582,55 @@ Recept: Milanesa de Lomo (argentínsky bravčový rezeň)</textarea>
     </div>
   </div>
 
-  <h2 class="section-title">Predchádzajúce týždne</h2>
-  <ul>
-    <li><a href="archiv/2026-09-14.html">14.–20. 9. 2026</a></li>
-    <li><a href="archiv/2026-09-07.html">7.–13. 9. 2026</a></li>
-    <li><a href="archiv/2026-08-31.html">31. 8. – 6. 9. 2026</a></li>
-    <li><a href="archiv/2026-08-24.html">24.–30. 8. 2026</a></li>
-    <li><a href="archiv/2026-08-17.html">17.–23. 8. 2026</a></li>
-    <li><a href="archiv/2026-08-10.html">10.–16. 8. 2026</a></li>
+  <h2 class="section-title" id="recipe-index">Zoznam receptov (28 spolu, zoradené abecedne)</h2>
+  <div class="recipe-search">
+    <input type="text" id="recipeSearch" placeholder="Hľadať recept alebo kuchyňu…" oninput="filterRecipeIndex()">
+  </div>
+  <ul class="recipe-index-list" id="recipeIndexList">
+        <li data-search="bravcovy paprikas stredoeuropska kuchyna"><a href="archiv/2026-08-24.html#wed">Bravčový paprikáš</a> <span class="ri-cuisine">Stredoeurópska kuchyňa</span> <span class="ri-week">Pondelok 24. 8. – nedeľa 30. 8. 2026</span></li>
+        <li data-search="ca kho to — karamelizovana ryba vietnamska kuchyna"><a href="archiv/2026-08-31.html#mon">Cá kho tộ — karamelizovaná ryba</a> <span class="ri-cuisine">Vietnamská kuchyňa</span> <span class="ri-week">Pondelok 31. 8. – nedeľa 6. 9. 2026</span></li>
+        <li data-search="cinske kuracie so zeleninou cinska kuchyna"><a href="archiv/2026-08-17.html#wed">Čínske kuracie so zeleninou</a> <span class="ri-cuisine">Čínska kuchyňa</span> <span class="ri-week">Pondelok 17. 8. – nedeľa 23. 8. 2026</span></li>
+        <li data-search="doro wat — etiopske kura na kosti etiopska/vychodoafricka kuchyna"><a href="archiv/2026-09-07.html#sun">Doro Wat — etiópske kura na kosti</a> <span class="ri-cuisine">Etiópska/Východoafrická kuchyňa</span> <span class="ri-week">Pondelok 7. 9. – nedeľa 13. 9. 2026</span></li>
+        <li data-search="ezogelin — turecka sosovicovo-bulgurova polievka turecka kuchyna"><a href="archiv/2026-09-14.html#tue">Ezogelin — turecká šošovicovo-bulgurová polievka</a> <span class="ri-cuisine">Turecká kuchyňa</span> <span class="ri-week">Pondelok 14. 9. – nedeľa 20. 9. 2026</span></li>
+        <li data-search="gai yang — thajske grilovane kura na kosti thajska kuchyna"><a href="archiv/2026-09-14.html#sun">Gai Yang — thajské grilované kura na kosti</a> <span class="ri-cuisine">Thajská kuchyňa</span> <span class="ri-week">Pondelok 14. 9. – nedeľa 20. 9. 2026</span></li>
+        <li data-search="grecka pecena ryba s citronovymi zemiakmi grecka kuchyna"><a href="archiv/2026-09-07.html#wed">Grécka pečená ryba s citrónovými zemiakmi</a> <span class="ri-cuisine">Grécka kuchyňa</span> <span class="ri-week">Pondelok 7. 9. – nedeľa 13. 9. 2026</span></li>
+        <li data-search="grecky kuraci air-fryer tanier grecka kuchyna"><a href="archiv/2026-08-10.html#mon">Grécky kurací air-fryer tanier</a> <span class="ri-cuisine">Grécka kuchyňa</span> <span class="ri-week">Pondelok 10. 8. – nedeľa 16. 8. 2026</span></li>
+        <li data-search="indicky kuraci korma indicka kuchyna"><a href="archiv/2026-08-17.html#mon">Indický kurací korma</a> <span class="ri-cuisine">Indická kuchyňa</span> <span class="ri-week">Pondelok 17. 8. – nedeľa 23. 8. 2026</span></li>
+        <li data-search="japchae — korejske sklenene rezance s morcacim masom korejska kuchyna"><a href="archiv/2026-08-31.html#sat">Japchae — kórejské sklenené rezance s morčacím mäsom</a> <span class="ri-cuisine">Kórejská kuchyňa</span> <span class="ri-week">Pondelok 31. 8. – nedeľa 6. 9. 2026</span></li>
+        <li data-search="juhoamericke grilovane kura &quot;a la brasa&quot; s aji verde juhoamericka kuchyna (peru)"><a href="archiv/2026-08-24.html#sun">Juhoamerické grilované kura &quot;a la brasa&quot; s aji verde</a> <span class="ri-cuisine">Juhoamerická kuchyňa (Peru)</span> <span class="ri-week">Pondelok 24. 8. – nedeľa 30. 8. 2026</span></li>
+        <li data-search="karibska kokosovo-limetkova ryba karibska kuchyna"><a href="archiv/2026-09-14.html#thu">Karibská kokosovo-limetková ryba</a> <span class="ri-cuisine">Karibská kuchyňa</span> <span class="ri-week">Pondelok 14. 9. – nedeľa 20. 9. 2026</span></li>
+        <li data-search="karibske jerk kura s ryzou a fazulou karibska kuchyna"><a href="archiv/2026-08-17.html#sun">Karibské jerk kura s ryžou a fazuľou</a> <span class="ri-cuisine">Karibská kuchyňa</span> <span class="ri-week">Pondelok 17. 8. – nedeľa 23. 8. 2026</span></li>
+        <li data-search="kokosovo-kari cestoviny s cicerom, batatmi a vajcom vegetarianska fusion kuchyna"><a href="archiv/2026-08-24.html#sat">Kokosovo-kari cestoviny s cícerom, batátmi a vajcom</a> <span class="ri-cuisine">Vegetariánska fusion kuchyňa</span> <span class="ri-week">Pondelok 24. 8. – nedeľa 30. 8. 2026</span></li>
+        <li data-search="levantske kura s hummusom arabska/levantska kuchyna"><a href="archiv/2026-08-17.html#sat">Levantské kura s hummusom</a> <span class="ri-cuisine">Arabská/levantská kuchyňa</span> <span class="ri-week">Pondelok 17. 8. – nedeľa 23. 8. 2026</span></li>
+        <li data-search="marocky morcaci gulas s cicerom marocka kuchyna"><a href="archiv/2026-08-10.html#wed">Marocký morčací guláš s cícerom</a> <span class="ri-cuisine">Marocká kuchyňa</span> <span class="ri-week">Pondelok 10. 8. – nedeľa 16. 8. 2026</span></li>
+        <li data-search="mexicke pollo asado entero s ciernou fazulou a avokadovou smotanou mexicka kuchyna"><a href="archiv/2026-08-31.html#sun">Mexické pollo asado entero s čiernou fazuľou a avokádovou smotanou</a> <span class="ri-cuisine">Mexická kuchyňa</span> <span class="ri-week">Pondelok 31. 8. – nedeľa 6. 9. 2026</span></li>
+        <li data-search="milanesa de lomo (argentinsky bravcovy rezen) juhoamericka kuchyna"><a href="#thu">Milanesa de Lomo (argentínsky bravčový rezeň)</a> <span class="ri-cuisine">Juhoamerická kuchyňa</span> <span class="ri-week">Pondelok 21. 9. – nedeľa 27. 9. 2026</span></li>
+        <li data-search="pekingske pecene kacacie stehna so zazvorovo-sojovou glazurou cinska kuchyna"><a href="#sun">Pekingské pečené kačacie stehná so zázvorovo-sójovou glazúrou</a> <span class="ri-cuisine">Čínska kuchyňa</span> <span class="ri-week">Pondelok 21. 9. – nedeľa 27. 9. 2026</span></li>
+        <li data-search="pork adobo — filipinske dusene bravcove filipinska kuchyna"><a href="archiv/2026-09-07.html#mon">Pork Adobo — filipínske dusené bravčové</a> <span class="ri-cuisine">Filipínska kuchyňa</span> <span class="ri-week">Pondelok 7. 9. – nedeľa 13. 9. 2026</span></li>
+        <li data-search="sayadieh — libanonska ryba s karamelizovanou cibulovou ryzou arabska (levantska) kuchyna"><a href="#tue">Sayadieh — libanonská ryba s karamelizovanou cibuľovou ryžou</a> <span class="ri-cuisine">Arabská (levantská) kuchyňa</span> <span class="ri-week">Pondelok 21. 9. – nedeľa 27. 9. 2026</span></li>
+        <li data-search="seffa medfouna — marocke vermicelli s kuratom marocka kuchyna"><a href="archiv/2026-09-07.html#sat">Seffa Medfouna — marocké vermicelli s kuraťom</a> <span class="ri-cuisine">Marocká kuchyňa</span> <span class="ri-week">Pondelok 7. 9. – nedeľa 13. 9. 2026</span></li>
+        <li data-search="soupe au pistou — provensalska zeleninova polievka s cestovinami mediteranska kuchyna — francuzsko"><a href="#sat">Soupe au Pistou — provensálska zeleninová polievka s cestovinami</a> <span class="ri-cuisine">Mediteránska kuchyňa — Francúzsko</span> <span class="ri-week">Pondelok 21. 9. – nedeľa 27. 9. 2026</span></li>
+        <li data-search="thajska kokosova biela ryba thajska kuchyna"><a href="archiv/2026-08-10.html#sat">Thajská kokosová biela ryba</a> <span class="ri-cuisine">Thajská kuchyňa</span> <span class="ri-week">Pondelok 10. 8. – nedeľa 16. 8. 2026</span></li>
+        <li data-search="treska al ajillo s pecenou paprikou a zemiakmi mediteranska kuchyna — spanielsko"><a href="archiv/2026-08-24.html#mon">Treska al ajillo s pečenou paprikou a zemiakmi</a> <span class="ri-cuisine">Mediteránska kuchyňa — Španielsko</span> <span class="ri-week">Pondelok 24. 8. – nedeľa 30. 8. 2026</span></li>
+        <li data-search="turecky peceny kuraci obed turecka kuchyna"><a href="archiv/2026-08-10.html#sun">Turecký pečený kurací obed</a> <span class="ri-cuisine">Turecká kuchyňa</span> <span class="ri-week">Pondelok 10. 8. – nedeľa 16. 8. 2026</span></li>
+        <li data-search="vegetarianska semiya upma s chana sundal indicka kuchyna (juh)"><a href="archiv/2026-09-14.html#sat">Vegetariánska Semiya Upma s chana sundal</a> <span class="ri-cuisine">Indická kuchyňa (juh)</span> <span class="ri-week">Pondelok 14. 9. – nedeľa 20. 9. 2026</span></li>
+        <li data-search="zazvorove bravcove (buta no shogayaki) japonska kuchyna"><a href="archiv/2026-08-31.html#wed">Zázvorové bravčové (Buta no shogayaki)</a> <span class="ri-cuisine">Japonská kuchyňa</span> <span class="ri-week">Pondelok 31. 8. – nedeľa 6. 9. 2026</span></li>
   </ul>
+  <p class="ri-empty" id="riEmpty">Žiadny recept nezodpovedá hľadaniu.</p>
+  <script>
+    function filterRecipeIndex() {
+      var q = document.getElementById('recipeSearch').value.toLowerCase();
+      var items = document.getElementById('recipeIndexList').children;
+      var visible = 0;
+      for (var i = 0; i < items.length; i++) {
+        var li = items[i];
+        var match = li.getAttribute('data-search').indexOf(q) !== -1;
+        li.style.display = match ? '' : 'none';
+        if (match) visible++;
+      }
+      document.getElementById('riEmpty').style.display = visible === 0 ? 'block' : 'none';
+    }
+  </script>
 
   <footer>
     Budúci týždeň v rotácii: stredoeurópska, vegetariánska fusion, mexická a vietnamská kuchyňa.
